@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陈希旸 - 销售与市场推广简历</title>
+    <script src="https://cdn.tailwindcss.com/3.3.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .section-title {
+            position: relative;
+            padding-left: 1rem;
+        }
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #1d4ed8;
+            border-radius: 2px;
+        }
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #1d4ed8;
+            color: white;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #e2e8f0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: #1d4ed8;
+            z-index: 1;
+        }
+        .skill-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: #e0e7ff;
+            color: #1d4ed8;
+            border-radius: 9999px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        @media (max-width: 768px) {
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- 头部信息 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 card">
+            <div class="md:flex">
+                <div class="p-8 flex-1">
+                    <div class="flex items-center mb-6">
+                        <div class="mr-6">
+                            <div class="w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-4xl font-bold">
+                                陈
+                            </div>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-800 mb-1">陈希旸</h1>
+                            <div class="text-xl text-blue-600 font-medium mb-2">销售与市场推广</div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">2年经验</span>
+                                <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">期望福州</span>
+                                <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">期望7-9K</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="flex items-center">
+                            <div class="contact-icon mr-3">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-500">联系电话</div>
+                                <div class="font-medium">17605015572</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="contact-icon mr-3">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-500">电子邮箱</div>
+                                <div class="font-medium">2868037696@qq.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="contact-icon mr-3">
+                                <i class="fab fa-qq"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-500">QQ号</div>
+                                <div class="font-medium">2868037696</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="contact-icon mr-3">
+                                <i class="fab fa-weixin"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-500">微信号</div>
+                                <div class="font-medium">Euphoria-0225</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 教育背景 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 card p-6">
+            <h2 class="text-xl font-bold mb-6 section-title">教育背景</h2>
+            <div class="space-y-4">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="pl-4">
+                        <div class="flex justify-between items-start flex-col md:flex-row">
+                            <h3 class="font-bold text-gray-800">福建信息职业学院</h3>
+                            <span class="text-sm text-gray-500">2020年09月-2023年06月</span>
+                        </div>
+                        <p class="text-gray-600">大专学历</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="pl-4">
+                        <div class="flex justify-between items-start flex-col md:flex-row">
+                            <h3 class="font-bold text-gray-800">福州长乐职业中专学校</h3>
+                            <span class="text-sm text-gray-500">2017年09月-2020年06月</span>
+                        </div>
+                        <p class="text-gray-600">中专学历</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="pl-4">
+                        <div class="flex justify-between items-start flex-col md:flex-row">
+                            <h3 class="font-bold text-gray-800">福建西山学校</h3>
+                            <span class="text-sm text-gray-500">2014年09月-2017年06月</span>
+                        </div>
+                        <p class="text-gray-600">初中学历</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 职业经历 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 card p-6">
+            <h2 class="text-xl font-bold mb-6 section-title">职业经历</h2>
+            <div class="space-y-8">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="pl-4">
+                        <div class="flex justify-between items-start flex-col md:flex-row mb-2">
+                            <h3 class="font-bold text-gray-800">福建湃特利网络科技有限公司 | 销售与市场推广</h3>
+                            <span class="text-sm text-gray-500">2024年10月11日-2025年07月25日</span>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                            <li>负责公司核心产品的市场推广与销售策略落地，在提成激励机制下完成季度销售目标</li>
+                            <li>运用AI数据分析工具构建客户画像，精准定位目标群体，提升获客转化率</li>
+                            <li>策划并执行线上营销活动8场，累计触达用户5万+，带动产品曝光量增长</li>
+                            <li>协同设计团队优化产品宣传素材，使用Photoshop完成海报设计，提升品牌视觉识别度</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="pl-4">
+                        <div class="flex justify-between items-start flex-col md:flex-row mb-2">
+                            <h3 class="font-bold text-gray-800">福州千月电子商务有限公司 | 淘宝店铺运营专员</h3>
+                            <span class="text-sm text-gray-500">2024年02月05日-2024年09月05日</span>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                            <li>全面负责淘宝店铺的日常运营与销售管理，在提成制驱动下实现店铺月销售额环比增长</li>
+                            <li>运用Photoshop完成产品详情页设计与主图优化，提升视觉转化率</li>
+                            <li>使用剪映制作产品宣传短视频，带动新品销量增长</li>
+                            <li>借助AI数据分析工具研判市场趋势，优化关键词投放策略，降低获客成本</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="pl-4">
+                        <div class="flex justify-between items-start flex-col md:flex-row mb-2">
+                            <h3 class="font-bold text-gray-800">福州护航数码有限公司 | 网络销售专员</h3>
+                            <span class="text-sm text-gray-500">2023年07月25日-2024年01月31日</span>
+                        </div>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                            <li>负责POS机产品的线上销售与推广，在提成激励模式下，主动开拓中小企业客户资源，超额完成月度销售目标</li>
+                            <li>通过电话营销与线上沟通，建立完善的客户档案管理体系，提升客户复购率</li>
+                            <li>协同技术团队解决客户使用问题，优化服务流程，保持高客户满意度评分</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 专业技能 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 card p-6">
+            <h2 class="text-xl font-bold mb-6 section-title">专业技能</h2>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">图像处理</h3>
+                    <p class="text-gray-700">熟练使用Photoshop进行商业视觉设计，包括产品修图、详情页排版及营销海报制作</p>
+                </div>
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">视频剪辑</h3>
+                    <p class="text-gray-700">精通剪映及Premiere Pro(PR)，可独立完成短视频全流程制作及专业级视频后期处理</p>
+                </div>
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">销售管理</h3>
+                    <p class="text-gray-700">精通线上获客渠道运营，擅长客户生命周期管理与高价值订单转化</p>
+                </div>
+                <div>
+                    <h3 class="font-medium text-gray-800 mb-2">数字技能</h3>
+                    <p class="text-gray-700">熟悉办公软件操作，了解网站建设基本流程</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 个人项目 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 card p-6">
+            <h2 class="text-xl font-bold mb-6 section-title">个人项目</h2>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="pl-4">
+                    <div class="flex justify-between items-start flex-col md:flex-row mb-2">
+                        <h3 class="font-bold text-gray-800">品牌烧烤店投资运营 | 投资人</h3>
+                        <span class="text-sm text-gray-500">2023年-2024年</span>
+                    </div>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li>投资运营两家品牌烧烤店，主导完成选址评估、竞品分析及差异化定位</li>
+                        <li>负责前期人员培训，建立标准化服务流程，团队规模扩展至15人</li>
+                        <li>后因区域同类餐饮竞争白热化，经股东协商实施战略收缩，完成平稳闭店</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 个人优势 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 card p-6">
+            <h2 class="text-xl font-bold mb-6 section-title">个人优势</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-blue-800 mb-2 flex items-center">
+                        <i class="fas fa-users mr-2"></i> 团队协作
+                    </h3>
+                    <p class="text-gray-700">具备出色的团队融入能力，擅长跨部门沟通协作，在集体项目中能主动承担责任并推动目标达成</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-blue-800 mb-2 flex items-center">
+                        <i class="fas fa-bullseye mr-2"></i> 执行韧性
+                    </h3>
+                    <p class="text-gray-700">对既定目标保持高度专注，面对挑战能持续投入精力，确保任务高质量完成</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-blue-800 mb-2 flex items-center">
+                        <i class="fas fa-brain mr-2"></i> 学习敏锐度
+                    </h3>
+                    <p class="text-gray-700">拥有快速学习能力，可在短期内掌握新工具与技术</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="font-medium text-blue-800 mb-2 flex items-center">
+                        <i class="fas fa-chart-line mr-2"></i> 行业洞察
+                    </h3>
+                    <p class="text-gray-700">对互联网发展趋势有一定的理解，持续关注新兴营销模式与技术应用</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 自我评价 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8 card p-6">
+            <h2 class="text-xl font-bold mb-6 section-title">自我评价</h2>
+            <div class="bg-blue-50 p-6 rounded-lg">
+                <p class="text-gray-700 italic">
+                    作为一名具备多元技能的销售从业者，始终以"肯干才能赚钱"为职业信条。精通PS、剪映、PR等设计工具，能够从视觉到策略全方位赋能业务。通过数据驱动与高效执行，在竞争市场中持续创造价值，期待在更具挑战性的平台实现职业突破。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 简单的交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 卡片悬停效果
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                    this.style.boxShadow = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
