@@ -3,266 +3,1058 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陈希旸 - 应聘简介</title>
-    <script src="https://cdn.tailwindcss.com/3.3.3"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>每日任务进度库</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #f7f7f5;
+            --sidebar: #fbfbfa;
+            --border: #e6e6e6;
+            --text: #1f2328;
+            --muted: #6b7280;
+            --primary: #2563eb;
+            --primary-soft: rgba(37, 99, 235, 0.08);
+            --accent: #0891b2;
+            --card: #ffffff;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', 'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
         }
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+
+        .app-shell {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            min-height: 100vh;
         }
-        .card-hover {
-            transition: all 0.3s ease;
+
+        aside {
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            padding: 24px 18px 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
         }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 28px 0 rgba(31, 38, 135, 0.15);
+
+        .workspace {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(30, 58, 138, 0.05) 100%);
-            border-left: 4px solid #1e40af;
+
+        .workspace-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(140deg, #2563eb, #38bdf8);
+            display: grid;
+            place-items: center;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1px;
         }
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
+
+        .workspace-info {
+            display: grid;
+            gap: 2px;
+        }
+
+        .workspace-info strong {
+            font-size: 1rem;
+        }
+
+        .workspace-info span {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .nav-group {
+            display: grid;
+            gap: 6px;
+        }
+
+        .nav-group h3 {
+            margin: 0 0 8px;
+            font-size: 0.78rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            color: var(--muted);
+            font-size: 0.92rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-button.active,
+        .nav-button:hover {
+            background: rgba(15, 23, 42, 0.04);
+            color: var(--text);
+        }
+
+        .nav-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            background: rgba(15, 23, 42, 0.05);
+            display: grid;
+            place-items: center;
+            font-size: 0.75rem;
+        }
+
+        main {
+            padding: 32px 48px 48px;
+            display: grid;
+            grid-template-rows: auto auto auto 1fr;
+            gap: 24px;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        .breadcrumbs strong {
+            color: var(--text);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            background-color: #1e40af;
+            background: #1f2937;
         }
-        .timeline-line {
-            width: 2px;
-            background-color: #e2e8f0;
+
+        .page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 24px;
         }
-        .skill-pill {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            background-color: #e0e7ff;
-            color: #1e40af;
-            margin-right: 8px;
+
+        .page-title {
+            display: grid;
+            gap: 8px;
+        }
+
+        .page-title h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .page-title p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .metric-card {
+            min-width: 220px;
+            padding: 18px 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            background: var(--card);
+            display: grid;
+            gap: 10px;
+        }
+
+        .metric-card span {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .metric-card strong {
+            font-size: 1.6rem;
+            line-height: 1.2;
+        }
+
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toolbar button,
+        .toolbar input,
+        .toolbar select {
+            font: inherit;
+        }
+
+        .primary-btn {
+            background: #1f2937;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .primary-btn:hover {
+            background: #111827;
+            transform: translateY(-1px);
+        }
+
+        .filter-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            padding: 12px 16px;
+            border: 1px solid rgba(15, 23, 42, 0.06);
+            backdrop-filter: blur(8px);
+        }
+
+        .filter-bar label {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .filter-bar input[type="date"],
+        .filter-bar input[type="search"] {
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            background: #fff;
+            width: 170px;
+        }
+
+        .filter-bar input[type="search"] {
+            flex: 1;
+        }
+
+        .data-card {
+            background: var(--card);
+            border-radius: 16px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 18px 50px -40px rgba(15, 23, 42, 0.6);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            text-align: left;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #9ca3af;
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+            background: rgba(249, 250, 251, 0.9);
+        }
+
+        tbody td {
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.04);
+            font-size: 0.94rem;
+        }
+
+        tbody tr:hover {
+            background: rgba(15, 23, 42, 0.03);
+        }
+
+        .product-cell {
+            display: grid;
+            gap: 6px;
+        }
+
+        .product-title {
+            font-weight: 600;
+        }
+
+        .product-meta {
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .material-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .material-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(37, 99, 235, 0.25);
+            color: #1d4ed8;
+            background: rgba(37, 99, 235, 0.08);
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .material-pill.video {
+            border-color: rgba(8, 145, 178, 0.28);
+            color: #0e7490;
+            background: rgba(8, 145, 178, 0.12);
+        }
+
+        .material-pill:hover {
+            transform: translateY(-1px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px 60px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .empty-state strong {
+            display: block;
             margin-bottom: 8px;
-            font-size: 14px;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .feedback {
+            display: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            font-size: 0.88rem;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.error {
+            background: rgba(220, 38, 38, 0.08);
+            border-color: rgba(220, 38, 38, 0.18);
+            color: #b91c1c;
+        }
+
+        .feedback.success {
+            background: rgba(34, 197, 94, 0.08);
+            border-color: rgba(34, 197, 94, 0.18);
+            color: #15803d;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.28);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            backdrop-filter: blur(4px);
+            z-index: 20;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            width: min(760px, 100%);
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 30px 80px -40px rgba(15, 23, 42, 0.5);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 80px);
+            overflow: hidden;
+        }
+
+        .modal header {
+            padding: 24px 28px 12px;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+        }
+
+        .modal header h2 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .modal header p {
+            margin: 8px 0 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .modal main {
+            padding: 20px 28px 28px;
+            overflow-y: auto;
+            display: grid;
+            gap: 24px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .form-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .form-field label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            font: inherit;
+            background: #fff;
+        }
+
+        .materials-panel {
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 14px;
+            padding: 18px 20px;
+            display: grid;
+            gap: 18px;
+            background: rgba(248, 250, 252, 0.6);
+        }
+
+        .materials-panel h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .materials-panel > p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .material-row {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 12px;
+            align-items: start;
+            background: #fff;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(15, 23, 42, 0.06);
+        }
+
+        .material-row strong {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .material-row .material-meta {
+            display: grid;
+            gap: 6px;
+        }
+
+        .upload-btn {
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px dashed rgba(37, 99, 235, 0.4);
+            background: rgba(37, 99, 235, 0.06);
+            color: #1d4ed8;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .upload-btn:hover {
+            background: rgba(37, 99, 235, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .upload-status {
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.4;
+        }
+
+        .modal footer {
+            padding: 18px 28px;
+            border-top: 1px solid rgba(15, 23, 42, 0.08);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background: rgba(248, 250, 252, 0.8);
+        }
+
+        .secondary-btn {
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            background: #fff;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .secondary-btn:hover {
+            background: rgba(15, 23, 42, 0.04);
+        }
+
+        .primary-solid {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+        }
+
+        .primary-solid:hover {
+            background: #1d4ed8;
+        }
+
+        @media (max-width: 1100px) {
+            .app-shell {
+                grid-template-columns: 1fr;
+            }
+
+            aside {
+                display: none;
+            }
+
+            main {
+                padding: 24px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .material-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .material-row {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-bar input[type="date"],
+            .filter-bar input[type="search"] {
+                width: 100%;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <div class="container mx-auto py-8 px-4 md:px-8 max-w-4xl">
-        <!-- 头部信息 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <div class="flex flex-col md:flex-row items-center md:items-start">
-                <div class="w-24 h-24 rounded-full bg-gradient-to-r from-blue-800 to-blue-600 flex items-center justify-center text-white text-4xl font-bold mb-4 md:mb-0 md:mr-6">
-                    陈
-                </div>
-                <div class="text-center md:text-left">
-                    <h1 class="text-3xl font-bold text-blue-900 mb-2">陈希旸</h1>
-                    <div class="text-xl font-semibold text-blue-700 mb-4">互联网销售 | 2年工作经验</div>
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-phone-alt mr-2 text-blue-600"></i>
-                            <span>17605015572</span>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-envelope mr-2 text-blue-600"></i>
-                            <span>2868037696@qq.com</span>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fab fa-weixin mr-2 text-blue-600"></i>
-                            <span>Euphoria-0225</span>
-                        </div>
-                    </div>
-                </div>
+<body>
+<div class="app-shell">
+    <aside>
+        <div class="workspace">
+            <div class="workspace-icon">跨</div>
+            <div class="workspace-info">
+                <strong>跨境项目工作区</strong>
+                <span>Notion · 云端协作</span>
             </div>
         </div>
 
-        <!-- 求职意向 -->
-        <div class="glassmorphism p-8 mb-8 card-hover bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-600">
-            <h2 class="text-2xl font-bold text-blue-900 mb-4 flex items-center">
-                <i class="fas fa-bullseye mr-3 text-blue-600"></i>求职意向
-            </h2>
-            <div class="pl-2">
-                <p class="text-lg font-semibold text-blue-800">目标职位：互联网销售</p>
-                <p class="text-gray-700 mt-2">期望薪资：7-9K | 期望城市：福州</p>
+        <div class="nav-group">
+            <h3>快速入口</h3>
+            <button class="nav-button active"><span class="nav-icon">📁</span>每日任务进度库</button>
+            <button class="nav-button"><span class="nav-icon">🗂️</span>素材归档</button>
+            <button class="nav-button"><span class="nav-icon">📈</span>数据看板</button>
+            <button class="nav-button"><span class="nav-icon">📝</span>操作手册</button>
+        </div>
+
+        <div class="nav-group">
+            <h3>最近</h3>
+            <button class="nav-button"><span class="nav-icon">⭐</span>精选活动素材</button>
+            <button class="nav-button"><span class="nav-icon">🧭</span>任务排期</button>
+        </div>
+    </aside>
+
+    <main>
+        <div class="top-bar">
+            <div class="breadcrumbs">
+                <span>跨境团队</span>
+                <span>/</span>
+                <strong>每日任务进度库</strong>
+            </div>
+            <div class="toolbar">
+                <button class="primary-btn" id="newTaskBtn">＋ 新建任务</button>
+                <div class="user-avatar" aria-hidden="true"></div>
             </div>
         </div>
 
-        <!-- 教育背景 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-graduation-cap mr-3 text-blue-600"></i>教育背景
-            </h2>
-            <div class="space-y-4">
-                <div class="flex">
-                    <div class="flex flex-col items-center mr-4">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line flex-grow mt-2"></div>
+        <div class="page-header">
+            <div class="page-title">
+                <h1>跨境电商素材管理库</h1>
+                <p>集中管理每日任务与素材，追踪不同商品在各国家站点的内容产出，确保每个商品上传三项素材并覆盖照片/视频类型。</p>
+            </div>
+            <div class="metric-card">
+                <span>已登记任务</span>
+                <strong id="taskTotal">0</strong>
+                <span style="color: var(--muted);">最近更新：<span id="lastUpdated">—</span></span>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <label for="filterDate">按日期筛选</label>
+            <input type="date" id="filterDate">
+            <input type="search" id="searchKeyword" placeholder="搜索商品名称 / 类型 / 国家">
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+
+        <div class="data-card">
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 140px;">日期</th>
+                    <th style="width: 240px;">商品信息</th>
+                    <th>素材（需 3 项）</th>
+                    <th style="width: 160px;">更新说明</th>
+                </tr>
+                </thead>
+                <tbody id="taskTableBody">
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<div class="modal-overlay" id="taskModalOverlay" role="dialog" aria-modal="true" aria-labelledby="taskModalTitle">
+    <div class="modal">
+        <header>
+            <h2 id="taskModalTitle">新建每日任务</h2>
+            <p>填写任务信息并上传 3 项素材，确保同时包含照片与视频类型，可为素材附加备注。</p>
+        </header>
+        <main>
+            <form id="taskForm">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="taskDate">任务日期</label>
+                        <input type="date" id="taskDate" required>
                     </div>
+                    <div class="form-field">
+                        <label for="productName">商品名称</label>
+                        <input type="text" id="productName" placeholder="请输入商品名称" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="productType">商品类型</label>
+                        <input type="text" id="productType" placeholder="如：美妆 / 家居 / 电子" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="productCountry">投放国家</label>
+                        <input type="text" id="productCountry" placeholder="如：美国 / 日本" required>
+                    </div>
+                </div>
+
+                <section class="materials-panel">
                     <div>
-                        <h3 class="text-lg font-semibold text-blue-800">福建信息职业学院</h3>
-                        <p class="text-gray-600">大学学历 | 2020年09月-2023年06月</p>
+                        <h3>素材要求</h3>
+                        <p>请上传 3 项素材，支持照片（JPG/PNG）与视频（MP4/MOV），会自动记录上传时间，可填写备注信息。</p>
                     </div>
-                </div>
-                <div class="flex">
-                    <div class="flex flex-col items-center mr-4">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line flex-grow mt-2"></div>
+                    <div class="material-row" data-material-index="0">
+                        <strong>素材 1</strong>
+                        <select class="material-type" required>
+                            <option value="">选择类型</option>
+                            <option value="photo">照片</option>
+                            <option value="video">视频</option>
+                        </select>
+                        <div class="material-meta">
+                            <button class="upload-btn" type="button">上传文件</button>
+                            <div class="upload-status">尚未上传</div>
+                            <input type="file" class="material-file" accept="image/*,video/*" hidden>
+                        </div>
+                        <input type="text" class="material-name" placeholder="文件名" readonly>
+                        <input type="text" class="material-remark" placeholder="备注（可选）">
                     </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-800">福建省福州市第18中学</h3>
-                        <p class="text-gray-600">高中学历 | 2017年09月-2020年06月</p>
+                    <div class="material-row" data-material-index="1">
+                        <strong>素材 2</strong>
+                        <select class="material-type" required>
+                            <option value="">选择类型</option>
+                            <option value="photo">照片</option>
+                            <option value="video">视频</option>
+                        </select>
+                        <div class="material-meta">
+                            <button class="upload-btn" type="button">上传文件</button>
+                            <div class="upload-status">尚未上传</div>
+                            <input type="file" class="material-file" accept="image/*,video/*" hidden>
+                        </div>
+                        <input type="text" class="material-name" placeholder="文件名" readonly>
+                        <input type="text" class="material-remark" placeholder="备注（可选）">
                     </div>
-                </div>
-                <div class="flex">
-                    <div class="flex flex-col items-center mr-4">
-                        <div class="timeline-dot"></div>
+                    <div class="material-row" data-material-index="2">
+                        <strong>素材 3</strong>
+                        <select class="material-type" required>
+                            <option value="">选择类型</option>
+                            <option value="photo">照片</option>
+                            <option value="video">视频</option>
+                        </select>
+                        <div class="material-meta">
+                            <button class="upload-btn" type="button">上传文件</button>
+                            <div class="upload-status">尚未上传</div>
+                            <input type="file" class="material-file" accept="image/*,video/*" hidden>
+                        </div>
+                        <input type="text" class="material-name" placeholder="文件名" readonly>
+                        <input type="text" class="material-remark" placeholder="备注（可选）">
                     </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-800">福建西山学校</h3>
-                        <p class="text-gray-600">初中学历 | 2014年09月-2017年06月</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 职业经历 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-briefcase mr-3 text-blue-600"></i>职业经历
-            </h2>
-            <div class="space-y-6">
-                <!-- 第一份工作 -->
-                <div class="highlight-box p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-blue-800">福建湃特利网络科技有限公司 | 销售与市场推广</h3>
-                        <p class="text-gray-500 text-sm md:text-base">2024年10月11日-2025年07月25日</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>负责公司核心产品的市场推广与销售策略落地，在提成激励机制下完成季度销售目标</li>
-                        <li>运用AI数据分析工具构建客户画像，精准定位目标群体，提升获客转化率</li>
-                        <li>策划并执行线上营销活动8场，累计触达用户5万+，带动产品曝光量增长</li>
-                        <li>协同设计团队优化产品宣传素材，使用Photoshop完成海报设计，提升品牌视觉识别度</li>
-                    </ul>
-                </div>
-
-                <!-- 第二份工作 -->
-                <div class="highlight-box p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-blue-800">福州千月电子商务有限公司 | 淘宝店铺运营专员</h3>
-                        <p class="text-gray-500 text-sm md:text-base">2024年02月05日-2024年09月05日</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>全面负责淘宝店铺的日常运营与销售管理，在提成制驱动下实现店铺月销售额环比增长</li>
-                        <li>运用Photoshop完成产品详情页设计与主图优化，提升视觉转化率</li>
-                        <li>使用剪映制作产品宣传短视频，带动新品销量增长</li>
-                        <li>借助AI数据分析工具研判市场趋势，优化关键词投放策略，降低获客成本</li>
-                    </ul>
-                </div>
-
-                <!-- 第三份工作 -->
-                <div class="highlight-box p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-blue-800">福州护航数码有限公司 | 网络销售专员</h3>
-                        <p class="text-gray-500 text-sm md:text-base">2023年07月25日-2024年01月31日</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>负责POS机产品的线上销售与推广，在提成激励模式下，主动开拓中小企业客户资源，超额完成月度销售目标</li>
-                        <li>通过电话营销与线上沟通，建立完善的客户档案管理体系，提升客户复购率</li>
-                        <li>协同技术团队解决客户使用问题，优化服务流程，保持高客户满意度评分</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- 专业技能 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-tools mr-3 text-blue-600"></i>专业技能
-            </h2>
-            <div class="flex flex-wrap">
-                <span class="skill-pill"><i class="fas fa-image mr-1"></i> Photoshop图像处理</span>
-                <span class="skill-pill"><i class="fas fa-video mr-1"></i> 剪映/PR视频剪辑</span>
-                <span class="skill-pill"><i class="fas fa-chart-line mr-1"></i> 销售管理与客户转化</span>
-                <span class="skill-pill"><i class="fas fa-laptop-code mr-1"></i> 办公软件与网站建设</span>
-                <span class="skill-pill"><i class="fas fa-users mr-1"></i> 团队协作与跨部门沟通</span>
-                <span class="skill-pill"><i class="fas fa-lightbulb mr-1"></i> 市场趋势分析</span>
-            </div>
-        </div>
-
-        <!-- 个人项目 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-project-diagram mr-3 text-blue-600"></i>个人项目
-            </h2>
-            <div class="highlight-box p-6 rounded-lg">
-                <h3 class="text-xl font-semibold text-blue-800 mb-3">品牌烧烤店投资运营 | 投资人 | 2023年-2024年</h3>
-                <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                    <li>投资运营两家品牌烧烤店，主导完成选址评估、竞品分析及差异化定位</li>
-                    <li>负责前期人员培训，建立标准化服务流程，团队规模扩展至15人</li>
-                    <li>后因区域同类餐饮竞争白热化，经股东协商实施战略收缩，完成平稳闭店</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 个人优势 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-star mr-3 text-blue-600"></i>个人优势
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-users mr-2"></i>团队协作</h3>
-                    <p class="text-gray-700 text-sm">具备出色的团队融入能力，擅长跨部门沟通协作，在集体项目中能主动承担责任并推动目标达成</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-bolt mr-2"></i>执行韧性</h3>
-                    <p class="text-gray-700 text-sm">对既定目标保持高度专注，面对挑战能持续投入精力，确保任务高质量完成</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-brain mr-2"></i>学习敏锐度</h3>
-                    <p class="text-gray-700 text-sm">拥有快速学习能力，可在短期内掌握新工具与技术</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-chart-pie mr-2"></i>行业洞察</h3>
-                    <p class="text-gray-700 text-sm">对互联网发展趋势有一定的理解，持续关注新兴营销模式与技术应用</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 自我评价 -->
-        <div class="glassmorphism p-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-user-edit mr-3 text-blue-600"></i>自我评价
-            </h2>
-            <div class="bg-blue-50 p-6 rounded-lg">
-                <p class="text-gray-700 italic">
-                    作为一名具备多元技能的销售从业者，始终以"肯干才能赚钱"为职业信条。精通PS、剪映、PR等设计工具，能够从视觉到策略全方位赋能业务。通过数据驱动与高效执行，在竞争市场中持续创造价值，期待在更具挑战性的平台实现职业突破。
-                </p>
-            </div>
-        </div>
+                </section>
+            </form>
+        </main>
+        <footer>
+            <button class="secondary-btn" type="button" data-close-modal>取消</button>
+            <button class="primary-solid secondary-btn" type="submit" form="taskForm">保存任务</button>
+        </footer>
     </div>
+</div>
 
-    <script>
-        // 简单的交互效果
-        document.addEventListener('DOMContentLoaded', function() {
-            // 卡片悬停效果
-            const cards = document.querySelectorAll('.card-hover');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                    this.style.boxShadow = '0 12px 28px 0 rgba(31, 38, 135, 0.15)';
-                });
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                    this.style.boxShadow = '';
-                });
-            });
+<script>
+    const storageKey = 'daily-task-progress';
+    let tasks = [];
+
+    const modalOverlay = document.getElementById('taskModalOverlay');
+    const taskForm = document.getElementById('taskForm');
+    const feedback = document.getElementById('feedback');
+    const filterDate = document.getElementById('filterDate');
+    const searchKeyword = document.getElementById('searchKeyword');
+    const taskTableBody = document.getElementById('taskTableBody');
+    const taskTotal = document.getElementById('taskTotal');
+    const lastUpdated = document.getElementById('lastUpdated');
+
+    function showFeedback(message, type = 'success') {
+        feedback.textContent = message;
+        feedback.className = `feedback show ${type}`;
+        setTimeout(() => {
+            feedback.className = 'feedback';
+        }, 3200);
+    }
+
+    function openModal() {
+        resetForm();
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function resetForm() {
+        taskForm.reset();
+        const rows = taskForm.querySelectorAll('.material-row');
+        rows.forEach(row => {
+            row.classList.remove('has-file');
+            row.querySelector('.upload-status').textContent = '尚未上传';
+            row.querySelector('.material-name').value = '';
+            row.dataset.fileData = '';
+            row.dataset.fileName = '';
+            row.dataset.uploadedAt = '';
         });
-    </script>
+    }
+
+    function readFileAsDataURL(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function handleMaterialUpload(row, file) {
+        readFileAsDataURL(file).then(dataUrl => {
+            const uploadedAt = new Date().toISOString();
+            row.dataset.fileData = dataUrl;
+            row.dataset.fileName = file.name;
+            row.dataset.uploadedAt = uploadedAt;
+            row.querySelector('.upload-status').textContent = `上传于 ${new Date(uploadedAt).toLocaleString()}`;
+            row.querySelector('.material-name').value = file.name;
+        }).catch(() => {
+            showFeedback('素材上传失败，请重试。', 'error');
+        });
+    }
+
+    function collectMaterials() {
+        const rows = [...taskForm.querySelectorAll('.material-row')];
+        const materials = [];
+
+        for (const row of rows) {
+            const type = row.querySelector('.material-type').value;
+            const remark = row.querySelector('.material-remark').value.trim();
+            const data = row.dataset.fileData;
+            const name = row.dataset.fileName;
+            const uploadedAt = row.dataset.uploadedAt;
+
+            if (!type) {
+                throw new Error('请为每项素材选择类型。');
+            }
+
+            if (!data) {
+                throw new Error('请完成 3 项素材的上传。');
+            }
+
+            materials.push({
+                id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+                type,
+                remark,
+                data,
+                name,
+                uploadedAt
+            });
+        }
+
+        const hasPhoto = materials.some(material => material.type === 'photo');
+        const hasVideo = materials.some(material => material.type === 'video');
+
+        if (!hasPhoto || !hasVideo) {
+            throw new Error('素材需同时包含照片与视频，请调整素材类型。');
+        }
+
+        return materials;
+    }
+
+    function formatMaterialType(type) {
+        return type === 'photo' ? '照片' : '视频';
+    }
+
+    function formatDate(date) {
+        return new Date(date).toLocaleDateString('zh-CN');
+    }
+
+    function formatDateTime(dateTime) {
+        return new Date(dateTime).toLocaleString('zh-CN');
+    }
+
+    function persistTasks() {
+        localStorage.setItem(storageKey, JSON.stringify(tasks));
+    }
+
+    function loadTasks() {
+        try {
+            const stored = localStorage.getItem(storageKey);
+            tasks = stored ? JSON.parse(stored) : [];
+        } catch (error) {
+            console.error('Failed to parse tasks from storage', error);
+            tasks = [];
+        }
+    }
+
+    function updateStats() {
+        taskTotal.textContent = tasks.length;
+        if (!tasks.length) {
+            lastUpdated.textContent = '—';
+            return;
+        }
+        const latest = tasks.reduce((latestTask, current) => {
+            if (!latestTask || current.createdAt > latestTask.createdAt) {
+                return current;
+            }
+            return latestTask;
+        }, null);
+        lastUpdated.textContent = latest ? formatDateTime(latest.createdAt) : '—';
+    }
+
+    function renderTasks() {
+        const keyword = searchKeyword.value.trim().toLowerCase();
+        const dateValue = filterDate.value;
+        const filtered = tasks.filter(task => {
+            const matchesDate = dateValue ? task.date === dateValue : true;
+            const matchesKeyword = keyword
+                ? [task.productName, task.productType, task.country]
+                    .join(' ')
+                    .toLowerCase()
+                    .includes(keyword)
+                : true;
+            return matchesDate && matchesKeyword;
+        });
+
+        taskTableBody.innerHTML = '';
+
+        if (!filtered.length) {
+            const emptyRow = document.createElement('tr');
+            const emptyCell = document.createElement('td');
+            emptyCell.colSpan = 4;
+            emptyCell.innerHTML = '<div class="empty-state"><strong>暂无任务记录</strong>请点击右上角“新建任务”添加今日任务，并上传完整素材。</div>';
+            emptyRow.appendChild(emptyCell);
+            taskTableBody.appendChild(emptyRow);
+            updateStats();
+            return;
+        }
+
+        filtered.forEach(task => {
+            const row = document.createElement('tr');
+
+            const dateCell = document.createElement('td');
+            dateCell.textContent = formatDate(task.date);
+
+            const productCell = document.createElement('td');
+            productCell.className = 'product-cell';
+            const title = document.createElement('div');
+            title.className = 'product-title';
+            title.textContent = task.productName;
+            const meta = document.createElement('div');
+            meta.className = 'product-meta';
+            meta.textContent = `${task.productType} · ${task.country}`;
+            productCell.append(title, meta);
+
+            const materialsCell = document.createElement('td');
+            const pillGroup = document.createElement('div');
+            pillGroup.className = 'material-pills';
+
+            task.materials.forEach((material, index) => {
+                const pill = document.createElement('button');
+                pill.type = 'button';
+                pill.className = `material-pill ${material.type === 'video' ? 'video' : ''}`;
+                pill.textContent = `${formatMaterialType(material.type)} · ${index + 1}`;
+                pill.title = `上传时间：${formatDateTime(material.uploadedAt)}\n备注：${material.remark || '无'}`;
+                pill.dataset.taskId = task.id;
+                pill.dataset.materialId = material.id;
+                pillGroup.appendChild(pill);
+            });
+
+            materialsCell.appendChild(pillGroup);
+
+            const remarkCell = document.createElement('td');
+            remarkCell.textContent = task.materials
+                .map(material => material.remark)
+                .filter(Boolean)
+                .join(' / ') || '—';
+
+            row.append(dateCell, productCell, materialsCell, remarkCell);
+            taskTableBody.appendChild(row);
+        });
+
+        updateStats();
+    }
+
+    function downloadMaterial(taskId, materialId) {
+        const task = tasks.find(item => item.id === taskId);
+        if (!task) return;
+        const material = task.materials.find(item => item.id === materialId);
+        if (!material) return;
+        const link = document.createElement('a');
+        link.href = material.data;
+        const extension = material.type === 'photo' ? (material.name.match(/\.(\w+)$/)?.[1] || 'jpg') : (material.name.match(/\.(\w+)$/)?.[1] || 'mp4');
+        link.download = `${task.productName.replace(/\s+/g, '_')}_${materialId}.${extension}`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function bindMaterialRow(row) {
+        const uploadBtn = row.querySelector('.upload-btn');
+        const fileInput = row.querySelector('.material-file');
+
+        uploadBtn.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', event => {
+            const file = event.target.files?.[0];
+            if (!file) return;
+            handleMaterialUpload(row, file);
+        });
+    }
+
+    document.getElementById('newTaskBtn').addEventListener('click', openModal);
+
+    modalOverlay.addEventListener('click', event => {
+        if (event.target === modalOverlay) {
+            closeModal();
+        }
+    });
+
+    document.querySelectorAll('[data-close-modal]').forEach(btn => {
+        btn.addEventListener('click', closeModal);
+    });
+
+    taskForm.addEventListener('submit', event => {
+        event.preventDefault();
+        try {
+            const materials = collectMaterials();
+            const task = {
+                id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+                date: document.getElementById('taskDate').value,
+                productName: document.getElementById('productName').value.trim(),
+                productType: document.getElementById('productType').value.trim(),
+                country: document.getElementById('productCountry').value.trim(),
+                materials,
+                createdAt: new Date().toISOString()
+            };
+
+            if (!task.date || !task.productName || !task.productType || !task.country) {
+                throw new Error('请完整填写任务信息。');
+            }
+
+            tasks.unshift(task);
+            persistTasks();
+            renderTasks();
+            showFeedback('任务已保存，素材同步完成。', 'success');
+            closeModal();
+        } catch (error) {
+            showFeedback(error.message, 'error');
+        }
+    });
+
+    taskTableBody.addEventListener('click', event => {
+        const target = event.target;
+        if (target.classList.contains('material-pill')) {
+            downloadMaterial(target.dataset.taskId, target.dataset.materialId);
+        }
+    });
+
+    filterDate.addEventListener('change', renderTasks);
+    searchKeyword.addEventListener('input', renderTasks);
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && modalOverlay.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    document.querySelectorAll('.material-row').forEach(bindMaterialRow);
+
+    loadTasks();
+    renderTasks();
+</script>
 </body>
 </html>
