@@ -13,8 +13,8 @@
             --bg: #f5f7fb;
             --card: #ffffff;
             --border: #e2e8f0;
-            --text: #1e293b;
-            --muted: #64748b;
+            --text: #1f2937;
+            --muted: #6b7280;
             --primary: #2563eb;
             --primary-soft: rgba(37, 99, 235, 0.12);
             --success: #10b981;
@@ -31,9 +31,9 @@
             background: var(--bg);
             font-family: 'Inter', 'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text);
+            padding: 32px clamp(16px, 3vw, 48px);
             display: flex;
             flex-direction: column;
-            padding: 32px;
             gap: 24px;
         }
 
@@ -45,36 +45,40 @@
 
         header h1 {
             margin: 0;
-            font-size: 1.75rem;
+            font-size: clamp(1.6rem, 2.4vw, 2.15rem);
             font-weight: 600;
+            letter-spacing: -0.02em;
         }
 
         header p {
             margin: 0;
             color: var(--muted);
+            font-size: 0.95rem;
         }
 
-        .grid {
+        main {
             display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 24px;
-            align-items: flex-start;
+            grid-template-columns: min(420px, 100%) 1fr;
+            gap: 28px;
+            align-items: start;
         }
 
         .card {
             background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-            padding: 28px;
+            border-radius: 22px;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+            padding: clamp(22px, 3vw, 28px);
+            display: grid;
+            gap: 22px;
         }
 
         form {
             display: grid;
-            gap: 24px;
+            gap: 20px;
         }
 
-        .field-group {
+        .field {
             display: grid;
             gap: 8px;
         }
@@ -86,56 +90,63 @@
 
         input[type="text"],
         input[type="date"],
-        select,
-        textarea {
+        textarea,
+        select {
             width: 100%;
-            padding: 12px 14px;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid var(--border);
             background: #f8fafc;
+            padding: 12px 14px;
             font: inherit;
             color: inherit;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
         textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 72px;
         }
 
         input:focus,
-        select:focus,
-        textarea:focus {
+        textarea:focus,
+        select:focus {
+            outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 4px var(--primary-soft);
-            outline: none;
             background: #fff;
         }
 
         .materials-summary {
+            border-radius: 16px;
+            border: 1px dashed var(--border);
+            padding: 18px;
             display: grid;
             gap: 12px;
         }
 
-        .summary-pill {
-            border-radius: 12px;
-            border: 1px dashed var(--border);
-            padding: 12px 14px;
+        .summary-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            align-items: center;
         }
 
-        .summary-pill strong {
-            font-size: 0.95rem;
-        }
-
-        .summary-details {
+        .summary-list {
             display: grid;
-            gap: 4px;
-            color: var(--muted);
-            font-size: 0.85rem;
+            gap: 10px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(148, 163, 184, 0.12);
+            font-size: 0.88rem;
+        }
+
+        .summary-item strong {
+            font-weight: 600;
         }
 
         .btn {
@@ -143,11 +154,11 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            border-radius: 12px;
             border: none;
+            border-radius: 12px;
             padding: 10px 18px;
-            font-weight: 500;
             font-size: 0.95rem;
+            font-weight: 500;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
         }
@@ -155,50 +166,47 @@
         .btn-primary {
             background: var(--primary);
             color: #fff;
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 12px 24px rgba(37, 99, 235, 0.2);
         }
 
         .btn-primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 14px 24px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 16px 30px rgba(37, 99, 235, 0.25);
         }
 
         .btn-secondary {
-            background: #e2e8f0;
+            background: rgba(15, 23, 42, 0.06);
             color: var(--text);
         }
 
-        .btn-tertiary {
-            background: rgba(15, 23, 42, 0.04);
-            color: var(--text);
-        }
-
-        .material-status {
-            display: flex;
+        .tag {
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            color: var(--muted);
-            font-size: 0.85rem;
-        }
-
-        .material-status .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--border);
-        }
-
-        .material-status.complete .dot {
-            background: var(--success);
+            gap: 6px;
+            padding: 4px 10px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
         .alert {
+            display: none;
             border-radius: 14px;
             padding: 14px 16px;
-            background: rgba(239, 68, 68, 0.08);
+            background: rgba(239, 68, 68, 0.1);
             color: var(--danger);
             font-size: 0.9rem;
-            display: none;
+        }
+
+        .tasks-empty {
+            border: 2px dashed var(--border);
+            border-radius: 18px;
+            padding: 32px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.95rem;
         }
 
         .tasks-list {
@@ -210,33 +218,29 @@
             border: 1px solid var(--border);
             border-radius: 18px;
             padding: 20px;
-            background: var(--card);
             display: grid;
-            gap: 16px;
+            gap: 14px;
         }
 
         .task-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .task-header h3 {
-            margin: 0;
-            font-size: 1.05rem;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .task-meta {
             display: flex;
-            gap: 12px;
             flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.88rem;
             color: var(--muted);
-            font-size: 0.9rem;
         }
 
         .materials-grid {
             display: grid;
-            gap: 12px;
+            gap: 10px;
         }
 
         .material-pill {
@@ -244,35 +248,30 @@
             border-radius: 12px;
             padding: 12px 14px;
             display: grid;
-            gap: 4px;
+            gap: 6px;
+            font-size: 0.88rem;
         }
 
-        .material-pill strong {
-            font-size: 0.95rem;
+        .material-pill header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .material-pill footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: var(--muted);
             font-size: 0.8rem;
-            color: var(--muted);
-        }
-
-        .empty-state {
-            border: 2px dashed var(--border);
-            border-radius: 18px;
-            padding: 32px;
-            text-align: center;
-            color: var(--muted);
         }
 
         dialog {
             border: none;
-            border-radius: 24px;
+            border-radius: 22px;
             padding: 0;
-            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
-            width: min(640px, calc(100vw - 40px));
+            box-shadow: 0 30px 80px rgba(15, 23, 42, 0.28);
+            width: min(720px, calc(100vw - 40px));
         }
 
         dialog::backdrop {
@@ -280,7 +279,7 @@
         }
 
         .modal {
-            padding: 28px;
+            padding: clamp(22px, 3vw, 30px);
             display: grid;
             gap: 20px;
         }
@@ -293,35 +292,40 @@
 
         .modal header h2 {
             margin: 0;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
         }
 
         .modal header button {
             background: none;
             border: none;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            line-height: 1;
             cursor: pointer;
             color: var(--muted);
         }
 
-        .materials-list {
+        .materials-manager {
             display: grid;
             gap: 16px;
         }
 
-        .material-item {
+        .material-row {
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 16px;
             display: grid;
-            gap: 12px;
+            gap: 14px;
         }
 
-        .material-top {
+        .material-row header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 12px;
+        }
+
+        .material-row header .tag {
+            background: rgba(37, 99, 235, 0.08);
         }
 
         .material-actions {
@@ -330,17 +334,20 @@
             flex-wrap: wrap;
         }
 
-        .material-info {
-            display: grid;
-            gap: 6px;
-            font-size: 0.9rem;
-            color: var(--muted);
+        .material-actions button {
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
         }
 
-        .modal footer {
+        .material-row footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .error-text {
@@ -349,27 +356,9 @@
             display: none;
         }
 
-        @media (max-width: 1024px) {
-            body {
-                padding: 24px;
-            }
-
-            .grid {
+        @media (max-width: 960px) {
+            main {
                 grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 18px;
-            }
-
-            header h1 {
-                font-size: 1.4rem;
-            }
-
-            .card {
-                padding: 20px;
             }
         }
     </style>
@@ -377,446 +366,436 @@
 <body>
 <header>
     <h1>每日任务进度库</h1>
-    <p>记录每日任务与素材上传情况，确保每个商品都拥有完整的照片与视频素材。</p>
+    <p>登记每日任务与素材完成情况，确保每个商品都具备完整的照片与视频素材。</p>
 </header>
-<div class="grid">
-    <div class="card">
+<main>
+    <section class="card" aria-labelledby="formTitle">
+        <div>
+            <span class="tag">新建任务</span>
+            <h2 id="formTitle" style="margin:12px 0 0;font-size:1.1rem;">填写任务信息</h2>
+        </div>
         <form id="taskForm">
-            <div class="field-group">
+            <div class="field">
                 <label for="taskDate">任务日期</label>
                 <input type="date" id="taskDate" required>
             </div>
-            <div class="field-group">
+            <div class="field">
                 <label for="productName">商品名称</label>
                 <input type="text" id="productName" placeholder="请输入商品名称" required>
             </div>
-            <div class="field-group">
+            <div class="field">
                 <label for="productType">商品类型</label>
                 <input type="text" id="productType" placeholder="例如：家电、服饰" required>
             </div>
-            <div class="field-group">
+            <div class="field">
                 <label for="productCountry">商品所属国家</label>
                 <input type="text" id="productCountry" placeholder="例如：中国、日本" required>
             </div>
-            <div class="field-group">
+            <div class="field">
                 <label>素材管理</label>
                 <div class="materials-summary" id="materialsSummary">
-                    <div class="summary-pill">
-                        <div class="summary-details">
-                            <strong>暂无素材</strong>
-                            <span>请点击下方按钮上传三项素材</span>
-                        </div>
-                        <button type="button" class="btn btn-tertiary" id="openMaterialModal">管理素材</button>
+                    <div class="summary-header">
+                        <strong>尚未设置素材</strong>
+                        <button type="button" class="btn btn-secondary" id="openMaterialModal">设置素材</button>
                     </div>
+                    <p style="margin:0;color:var(--muted);font-size:0.85rem;">一个商品需上传 3 个素材，并至少包含照片与视频类型。</p>
                 </div>
             </div>
             <div class="alert" id="formAlert"></div>
             <button type="submit" class="btn btn-primary">保存任务</button>
         </form>
-    </div>
-    <div class="card">
-        <h2 style="margin-top:0;margin-bottom:16px;font-size:1.15rem;">任务记录</h2>
-        <div id="tasksContainer" class="tasks-list">
-            <div class="empty-state" id="emptyState">暂时没有任务记录，请先创建任务。</div>
+    </section>
+    <section class="card" aria-labelledby="tasksTitle">
+        <div class="summary-header" style="margin-bottom:-6px;">
+            <h2 id="tasksTitle" style="margin:0;font-size:1.1rem;">任务记录</h2>
+            <span class="tag" id="taskCount">0 个任务</span>
         </div>
-    </div>
-</div>
+        <div id="tasksContainer" class="tasks-list">
+            <div class="tasks-empty" id="emptyState">暂无任务记录，请先创建一个任务。</div>
+        </div>
+    </section>
+</main>
 
 <dialog id="materialModal">
     <div class="modal">
         <header>
-            <h2>管理素材</h2>
-            <button type="button" id="closeMaterialModal">×</button>
-        </header>
-        <p style="margin:0;color:var(--muted);font-size:0.9rem;">一个商品需要上传三项素材，需同时包含照片与视频类型。支持为每项素材记录备注与上传时间，并可随时下载或替换。</p>
-        <div class="materials-list" id="materialsList"></div>
-        <div class="error-text" id="materialError"></div>
-        <footer>
-            <button type="button" class="btn btn-tertiary" id="addMaterial">新增素材</button>
-            <div class="material-actions">
-                <button type="button" class="btn btn-secondary" id="resetMaterials">重置</button>
-                <button type="button" class="btn btn-primary" id="confirmMaterials">完成</button>
+            <div>
+                <h2>设置商品素材</h2>
+                <p style="margin:6px 0 0;color:var(--muted);font-size:0.88rem;">上传 3 项素材文件，并记录上传时间与备注。素材需涵盖照片与视频。</p>
             </div>
-        </footer>
+            <button type="button" id="closeMaterialModal" aria-label="关闭素材设置">×</button>
+        </header>
+        <div class="materials-manager" id="materialsManager"></div>
+        <div class="error-text" id="materialError"></div>
+        <div class="material-actions" style="justify-content: flex-end;">
+            <button type="button" class="btn btn-secondary" id="resetMaterials">重置</button>
+            <button type="button" class="btn btn-primary" id="confirmMaterials">完成</button>
+        </div>
     </div>
 </dialog>
 
-<template id="materialItemTemplate">
-    <div class="material-item" data-id="">
-        <div class="material-top">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <strong class="material-title">素材</strong>
-                <select class="material-type">
-                    <option value="photo">照片</option>
-                    <option value="video">视频</option>
-                </select>
-            </div>
-            <button type="button" class="btn btn-tertiary remove-material">移除</button>
-        </div>
+<template id="materialTemplate">
+    <article class="material-row">
+        <header>
+            <strong class="material-title">素材</strong>
+            <select class="material-type">
+                <option value="photo">照片</option>
+                <option value="video">视频</option>
+            </select>
+        </header>
         <div class="material-actions">
             <input type="file" hidden>
             <button type="button" class="btn btn-secondary upload-btn">上传文件</button>
-            <button type="button" class="btn btn-tertiary download-btn" disabled>提取文件</button>
+            <button type="button" class="btn btn-secondary download-btn" disabled>下载素材</button>
         </div>
-        <div class="material-info">
+        <textarea class="material-remark" placeholder="素材备注（可选）"></textarea>
+        <footer>
             <span class="file-name">尚未上传文件</span>
             <span class="upload-time">上传时间：-</span>
-        </div>
-        <textarea class="material-remark" placeholder="填写素材备注"></textarea>
-    </div>
+        </footer>
+    </article>
 </template>
 
 <script>
+    const MATERIAL_COUNT = 3;
+    const materialsSummary = document.getElementById('materialsSummary');
+    const materialsManager = document.getElementById('materialsManager');
     const materialModal = document.getElementById('materialModal');
-    const openMaterialModal = document.getElementById('openMaterialModal');
-    const closeMaterialModal = document.getElementById('closeMaterialModal');
-    const addMaterialBtn = document.getElementById('addMaterial');
+    const openMaterialModalBtn = document.getElementById('openMaterialModal');
+    const closeMaterialModalBtn = document.getElementById('closeMaterialModal');
     const resetMaterialsBtn = document.getElementById('resetMaterials');
     const confirmMaterialsBtn = document.getElementById('confirmMaterials');
-    const materialsList = document.getElementById('materialsList');
-    const materialTemplate = document.getElementById('materialItemTemplate');
+    const materialTemplate = document.getElementById('materialTemplate');
     const materialError = document.getElementById('materialError');
-    const materialsSummary = document.getElementById('materialsSummary');
-    const formAlert = document.getElementById('formAlert');
+
     const taskForm = document.getElementById('taskForm');
+    const formAlert = document.getElementById('formAlert');
     const tasksContainer = document.getElementById('tasksContainer');
     const emptyState = document.getElementById('emptyState');
+    const taskCountTag = document.getElementById('taskCount');
 
     let currentMaterials = [];
-    const storageKey = 'dailyTaskRecords';
+    let tasks = [];
 
-    function generateId() {
-        return Math.random().toString(36).slice(2, 11);
-    }
-
-    function openModal() {
-        if (currentMaterials.length === 0) {
-            addMaterial();
+    function createId(prefix = 'id') {
+        if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+            return crypto.randomUUID();
         }
-        renderMaterialList();
-        materialError.style.display = 'none';
-        if (typeof materialModal.showModal === 'function') {
-            materialModal.showModal();
+        return `${prefix}-${Math.random().toString(16).slice(2)}-${Date.now()}`;
+    }
+
+    function escapeHtml(text = '') {
+        return text.replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[char] || char));
+    }
+
+    function createEmptyMaterial(index) {
+        return {
+            id: createId('material'),
+            slot: index + 1,
+            type: index < 2 ? 'photo' : 'video',
+            fileName: '',
+            fileData: '',
+            uploadedAt: '',
+            remark: ''
+        };
+    }
+
+    function ensureMaterialSlots() {
+        if (currentMaterials.length === MATERIAL_COUNT) return;
+        const next = [];
+        for (let i = 0; i < MATERIAL_COUNT; i++) {
+            const existing = currentMaterials[i];
+            next.push(existing ? existing : createEmptyMaterial(i));
         }
+        currentMaterials = next;
     }
 
-    function closeModal() {
-        if (typeof materialModal.close === 'function') {
-            materialModal.close();
-        }
-    }
-
-    function addMaterial(initialData = {}) {
-        if (currentMaterials.length >= 3) {
-            materialError.textContent = '每个商品最多三个素材。';
-            materialError.style.display = 'block';
-            return;
-        }
-        const id = initialData.id || generateId();
-        currentMaterials.push({
-            id,
-            type: initialData.type || 'photo',
-            fileName: initialData.fileName || '',
-            fileData: initialData.fileData || '',
-            uploadedAt: initialData.uploadedAt || '',
-            remark: initialData.remark || ''
-        });
-        renderMaterialList();
-    }
-
-    function removeMaterial(id) {
-        currentMaterials = currentMaterials.filter(item => item.id !== id);
-        renderMaterialList();
-    }
-
-    function updateMaterial(id, updates) {
-        currentMaterials = currentMaterials.map(item => item.id === id ? { ...item, ...updates } : item);
-        renderMaterialList(false);
-    }
-
-    function formatTime(time) {
-        if (!time) return '-';
-        const date = new Date(time);
+    function formatDateTime(value) {
+        if (!value) return '-';
+        const date = new Date(value);
         return date.toLocaleString('zh-CN', { hour12: false });
     }
 
-    function renderMaterialList(resetScroll = true) {
-        materialsList.innerHTML = '';
+    function renderMaterialsManager() {
+        materialsManager.innerHTML = '';
+        ensureMaterialSlots();
         currentMaterials.forEach((material, index) => {
             const node = materialTemplate.content.firstElementChild.cloneNode(true);
             node.dataset.id = material.id;
             node.querySelector('.material-title').textContent = `素材 ${index + 1}`;
+
             const typeSelect = node.querySelector('.material-type');
             typeSelect.value = material.type;
             typeSelect.addEventListener('change', (event) => {
-                updateMaterial(material.id, { type: event.target.value });
+                material.type = event.target.value;
+                renderMaterialsSummary();
             });
 
-            const removeButton = node.querySelector('.remove-material');
-            removeButton.addEventListener('click', () => removeMaterial(material.id));
-            removeButton.disabled = currentMaterials.length <= 1;
-
             const fileInput = node.querySelector('input[type="file"]');
-            const uploadButton = node.querySelector('.upload-btn');
-            const downloadButton = node.querySelector('.download-btn');
-            const fileName = node.querySelector('.file-name');
-            const uploadTime = node.querySelector('.upload-time');
+            const uploadBtn = node.querySelector('.upload-btn');
+            const downloadBtn = node.querySelector('.download-btn');
+            const fileNameEl = node.querySelector('.file-name');
+            const uploadTimeEl = node.querySelector('.upload-time');
             const remarkField = node.querySelector('.material-remark');
 
             remarkField.value = material.remark;
             remarkField.addEventListener('input', (event) => {
-                updateMaterial(material.id, { remark: event.target.value });
+                material.remark = event.target.value.trim();
+                renderMaterialsSummary();
             });
 
-            fileName.textContent = material.fileName || '尚未上传文件';
-            uploadTime.textContent = '上传时间：' + (material.uploadedAt ? formatTime(material.uploadedAt) : '-');
+            fileNameEl.textContent = material.fileName || '尚未上传文件';
+            uploadTimeEl.textContent = '上传时间：' + formatDateTime(material.uploadedAt);
 
-            uploadButton.addEventListener('click', () => fileInput.click());
+            uploadBtn.addEventListener('click', () => fileInput.click());
             fileInput.addEventListener('change', (event) => {
                 const file = event.target.files[0];
                 if (!file) return;
                 const reader = new FileReader();
                 reader.onload = () => {
-                    updateMaterial(material.id, {
-                        fileName: file.name,
-                        fileData: reader.result,
-                        uploadedAt: new Date().toISOString()
-                    });
+                    material.fileName = file.name;
+                    material.fileData = reader.result;
+                    material.uploadedAt = new Date().toISOString();
+                    fileNameEl.textContent = material.fileName;
+                    uploadTimeEl.textContent = '上传时间：' + formatDateTime(material.uploadedAt);
+                    downloadBtn.disabled = false;
+                    renderMaterialsSummary();
                 };
                 reader.readAsDataURL(file);
             });
 
             if (material.fileData) {
-                downloadButton.disabled = false;
-                downloadButton.addEventListener('click', () => {
+                downloadBtn.disabled = false;
+                downloadBtn.addEventListener('click', () => {
                     const link = document.createElement('a');
                     link.href = material.fileData;
-                    link.download = material.fileName || '素材';
+                    link.download = material.fileName || `素材${index + 1}`;
                     document.body.appendChild(link);
                     link.click();
                     link.remove();
                 });
             }
 
-            materialsList.appendChild(node);
+            materialsManager.appendChild(node);
         });
-
-        if (currentMaterials.length === 0) {
-            materialError.textContent = '尚未添加素材，请新增至少一项素材。';
-            materialError.style.display = 'block';
-        } else if (resetScroll) {
-            materialsList.scrollTop = materialsList.scrollHeight;
-        }
-
-        addMaterialBtn.disabled = currentMaterials.length >= 3;
     }
 
     function renderMaterialsSummary() {
-        materialsSummary.innerHTML = '';
-        if (currentMaterials.length === 0) {
+        const filled = currentMaterials.filter(item => item.fileData);
+        if (filled.length === 0) {
             materialsSummary.innerHTML = `
-                <div class="summary-pill">
-                    <div class="summary-details">
-                        <strong>暂无素材</strong>
-                        <span>请点击下方按钮上传三项素材</span>
-                    </div>
-                    <button type="button" class="btn btn-tertiary" id="openMaterialModal">管理素材</button>
+                <div class="summary-header">
+                    <strong>尚未设置素材</strong>
+                    <button type="button" class="btn btn-secondary" id="openMaterialModal">设置素材</button>
                 </div>
+                <p style="margin:0;color:var(--muted);font-size:0.85rem;">一个商品需上传 3 个素材，并至少包含照片与视频类型。</p>
             `;
-            materialsSummary.querySelector('#openMaterialModal').addEventListener('click', openModal);
-            return;
+        } else {
+            const summaryItems = currentMaterials.map((material, index) => `
+                <div class="summary-item">
+                    <span><strong>素材 ${index + 1}</strong> · ${material.type === 'photo' ? '照片' : '视频'}</span>
+                    <span>${escapeHtml(material.fileName) || '未上传'}${material.uploadedAt ? ' · ' + formatDateTime(material.uploadedAt) : ''}</span>
+                </div>
+            `).join('');
+            materialsSummary.innerHTML = `
+                <div class="summary-header">
+                    <strong>${filled.length}/${MATERIAL_COUNT} 个素材已设置</strong>
+                    <button type="button" class="btn btn-secondary" id="openMaterialModal">调整素材</button>
+                </div>
+                <div class="summary-list">${summaryItems}</div>
+            `;
         }
-
-        currentMaterials.forEach((material, index) => {
-            const pill = document.createElement('div');
-            pill.className = 'summary-pill';
-            const info = document.createElement('div');
-            info.className = 'summary-details';
-            info.innerHTML = `
-                <strong>素材 ${index + 1} · ${material.type === 'photo' ? '照片' : '视频'}</strong>
-                <span>${material.fileName || '尚未上传文件'}${material.uploadedAt ? ' · ' + formatTime(material.uploadedAt) : ''}</span>
-            `;
-            const status = document.createElement('div');
-            status.className = 'material-status' + (material.fileData ? ' complete' : '');
-            status.innerHTML = `<span class="dot"></span>${material.fileData ? '已上传' : '待上传'}`;
-            pill.appendChild(info);
-            pill.appendChild(status);
-            materialsSummary.appendChild(pill);
+        materialsSummary.querySelector('#openMaterialModal').addEventListener('click', () => {
+            openMaterialModal();
         });
-
-        const manageBtnWrapper = document.createElement('div');
-        manageBtnWrapper.className = 'summary-pill';
-        manageBtnWrapper.innerHTML = `
-            <div class="summary-details">
-                <strong>素材管理</strong>
-                <span>可继续上传、替换文件，或编辑备注</span>
-            </div>
-        `;
-        const manageBtn = document.createElement('button');
-        manageBtn.type = 'button';
-        manageBtn.className = 'btn btn-tertiary';
-        manageBtn.textContent = '管理素材';
-        manageBtn.addEventListener('click', openModal);
-        manageBtnWrapper.appendChild(manageBtn);
-        materialsSummary.appendChild(manageBtnWrapper);
     }
 
-    function validateMaterials(materials) {
-        if (materials.length !== 3) {
-            return '需要上传三项素材，当前数量不足。';
-        }
-        const missingFile = materials.some(item => !item.fileData);
+    function resetMaterials() {
+        currentMaterials = [];
+        ensureMaterialSlots();
+        renderMaterialsManager();
+        renderMaterialsSummary();
+        materialError.style.display = 'none';
+    }
+
+    function validateMaterials() {
+        const missingFile = currentMaterials.some(item => !item.fileData);
         if (missingFile) {
-            return '存在未上传文件的素材，请补充完整。';
+            return '请为 3 个素材全部上传文件。';
         }
-        const types = materials.map(item => item.type);
-        if (!types.includes('photo') || !types.includes('video')) {
-            return '三项素材中需至少包含照片与视频。';
+        const hasPhoto = currentMaterials.some(item => item.type === 'photo');
+        const hasVideo = currentMaterials.some(item => item.type === 'video');
+        if (!hasPhoto || !hasVideo) {
+            return '素材需同时包含照片与视频类型，请调整后再试。';
         }
         return '';
     }
 
-    function resetForm() {
-        taskForm.reset();
-        currentMaterials = [];
-        renderMaterialsSummary();
+    function openMaterialModal() {
+        ensureMaterialSlots();
+        renderMaterialsManager();
+        materialModal.showModal();
+        materialError.style.display = 'none';
     }
 
-    function saveTasks(tasks) {
-        localStorage.setItem(storageKey, JSON.stringify(tasks));
+    function closeMaterialModal() {
+        materialModal.close();
     }
 
     function loadTasks() {
-        const raw = localStorage.getItem(storageKey);
-        if (!raw) return [];
         try {
-            const data = JSON.parse(raw);
-            return Array.isArray(data) ? data : [];
+            const stored = localStorage.getItem('dailyTasks');
+            if (stored) {
+                tasks = JSON.parse(stored);
+            }
         } catch (error) {
             console.error('读取任务失败', error);
-            return [];
         }
+        renderTasks();
+    }
+
+    function saveTasks() {
+        localStorage.setItem('dailyTasks', JSON.stringify(tasks));
     }
 
     function renderTasks() {
-        const tasks = loadTasks();
         tasksContainer.innerHTML = '';
         if (tasks.length === 0) {
             emptyState.style.display = 'block';
             tasksContainer.appendChild(emptyState);
-            return;
-        }
-        emptyState.style.display = 'none';
-
-        tasks.forEach(task => {
-            const card = document.createElement('div');
-            card.className = 'task-card';
-            const header = document.createElement('div');
-            header.className = 'task-header';
-            const title = document.createElement('h3');
-            title.textContent = task.productName;
-            const date = document.createElement('span');
-            date.textContent = task.taskDate;
-            date.style.color = 'var(--muted)';
-            header.appendChild(title);
-            header.appendChild(date);
-
-            const meta = document.createElement('div');
-            meta.className = 'task-meta';
-            meta.innerHTML = `
-                <span>类型：${task.productType}</span>
-                <span>国家：${task.productCountry}</span>
-            `;
-
-            const materialsGrid = document.createElement('div');
-            materialsGrid.className = 'materials-grid';
-            task.materials.forEach((material, index) => {
-                const pill = document.createElement('div');
-                pill.className = 'material-pill';
-                pill.innerHTML = `
-                    <strong>素材 ${index + 1} · ${material.type === 'photo' ? '照片' : '视频'}</strong>
-                    <span>${material.fileName}</span>
-                    <footer>
-                        <span>${formatTime(material.uploadedAt)}</span>
-                        <a href="${material.fileData}" download="${material.fileName}" style="text-decoration:none;color:var(--primary);font-weight:500;">下载素材</a>
-                    </footer>
-                    <span style="font-size:0.85rem;color:var(--muted);">备注：${material.remark || '无'}</span>
+        } else {
+            emptyState.style.display = 'none';
+            tasks.forEach(task => {
+                const card = document.createElement('article');
+                card.className = 'task-card';
+                card.innerHTML = `
+                    <div class="task-header">
+                        <strong style="font-size:1rem;">${escapeHtml(task.productName)}</strong>
+                        <span class="tag">${task.taskDate}</span>
+                    </div>
+                    <div class="task-meta">
+                        <span>类型：${escapeHtml(task.productType)}</span>
+                        <span>国家：${escapeHtml(task.productCountry)}</span>
+                    </div>
+                    <div class="materials-grid">
+                        ${task.materials.map((material, index) => `
+                            <div class="material-pill">
+                                <header>
+                                    <strong>素材 ${index + 1} · ${material.type === 'photo' ? '照片' : '视频'}</strong>
+                                    <button type="button" class="btn btn-secondary" data-download="${index}" style="padding:6px 12px;font-size:0.75rem;">下载</button>
+                                </header>
+                                <div>${escapeHtml(material.fileName)}</div>
+                                <footer>
+                                    <span>${material.remark ? '备注：' + escapeHtml(material.remark) : '无备注'}</span>
+                                    <span>${formatDateTime(material.uploadedAt)}</span>
+                                </footer>
+                            </div>
+                        `).join('')}
+                    </div>
                 `;
-                materialsGrid.appendChild(pill);
-            });
 
-            card.appendChild(header);
-            card.appendChild(meta);
-            card.appendChild(materialsGrid);
-            tasksContainer.appendChild(card);
-        });
+                card.querySelectorAll('[data-download]').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const index = Number(event.currentTarget.dataset.download);
+                        const material = task.materials[index];
+                        if (!material?.fileData) return;
+                        const link = document.createElement('a');
+                        link.href = material.fileData;
+                        link.download = material.fileName || `素材${index + 1}`;
+                        document.body.appendChild(link);
+                        link.click();
+                        link.remove();
+                    });
+                });
+
+                tasksContainer.appendChild(card);
+            });
+        }
+        taskCountTag.textContent = `${tasks.length} 个任务`;
     }
 
-    openMaterialModal.addEventListener('click', openModal);
-    closeMaterialModal.addEventListener('click', closeModal);
-
-    materialModal.addEventListener('click', (event) => {
-        if (event.target === materialModal) {
-            closeModal();
-        }
+    openMaterialModalBtn.addEventListener('click', openMaterialModal);
+    closeMaterialModalBtn.addEventListener('click', () => {
+        closeMaterialModal();
     });
-
-    addMaterialBtn.addEventListener('click', () => {
-        materialError.style.display = 'none';
-        addMaterial();
+    materialModal.addEventListener('cancel', (event) => {
+        event.preventDefault();
+        closeMaterialModal();
     });
 
     resetMaterialsBtn.addEventListener('click', () => {
-        currentMaterials = [];
-        renderMaterialList();
+        resetMaterials();
     });
 
     confirmMaterialsBtn.addEventListener('click', () => {
-        const error = validateMaterials(currentMaterials);
-        if (error) {
-            materialError.textContent = error;
+        const message = validateMaterials();
+        if (message) {
+            materialError.textContent = message;
             materialError.style.display = 'block';
             return;
         }
+        materialError.style.display = 'none';
         renderMaterialsSummary();
-        closeModal();
+        closeMaterialModal();
     });
 
     taskForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        formAlert.style.display = 'none';
-        const error = validateMaterials(currentMaterials);
-        if (error) {
-            formAlert.textContent = error;
+        const message = validateMaterials();
+        if (message) {
+            formAlert.textContent = message;
+            formAlert.style.background = 'rgba(239, 68, 68, 0.12)';
+            formAlert.style.color = varDanger();
             formAlert.style.display = 'block';
+            openMaterialModal();
             return;
         }
+        formAlert.style.display = 'none';
 
-        const tasks = loadTasks();
-        const formData = {
-            id: generateId(),
-            taskDate: document.getElementById('taskDate').value,
-            productName: document.getElementById('productName').value.trim(),
-            productType: document.getElementById('productType').value.trim(),
-            productCountry: document.getElementById('productCountry').value.trim(),
+        const task = {
+            id: createId('task'),
+            taskDate: taskForm.taskDate.value,
+            productName: taskForm.productName.value.trim(),
+            productType: taskForm.productType.value.trim(),
+            productCountry: taskForm.productCountry.value.trim(),
+            createdAt: new Date().toISOString(),
             materials: currentMaterials.map(item => ({ ...item }))
         };
 
-        tasks.unshift(formData);
-        saveTasks(tasks);
+        tasks.unshift(task);
+        saveTasks();
         renderTasks();
-        resetForm();
+
+        taskForm.reset();
+        resetMaterials();
+        renderMaterialsSummary();
+
+        formAlert.textContent = '任务已保存，可在右侧查看。';
+        formAlert.style.background = 'rgba(16, 185, 129, 0.12)';
+        formAlert.style.color = varSuccess();
+        formAlert.style.display = 'block';
+        setTimeout(() => {
+            formAlert.style.display = 'none';
+        }, 3000);
     });
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const tasks = loadTasks();
-        if (tasks.length === 0) {
-            addMaterial();
-        } else {
-            renderTasks();
-        }
-        renderMaterialsSummary();
-    });
+    function varSuccess() {
+        return getComputedStyle(document.documentElement).getPropertyValue('--success') || '#10b981';
+    }
+
+    function varDanger() {
+        return getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#ef4444';
+    }
+
+    resetMaterials();
+    renderMaterialsSummary();
+    loadTasks();
 </script>
 </body>
 </html>
