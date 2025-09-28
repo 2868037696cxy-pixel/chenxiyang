@@ -3,266 +3,799 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陈希旸 - 应聘简介</title>
-    <script src="https://cdn.tailwindcss.com/3.3.3"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>每日任务进度库</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            color-scheme: light;
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --primary: #2563eb;
+            --primary-soft: rgba(37, 99, 235, 0.12);
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            font-family: 'Inter', 'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            padding: 32px clamp(16px, 3vw, 48px);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
+
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(1.6rem, 2.4vw, 2.15rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        header p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: min(420px, 100%) 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+            padding: clamp(22px, 3vw, 28px);
+            display: grid;
+            gap: 22px;
+        }
+
+        form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .field {
+            display: grid;
+            gap: 8px;
+        }
+
+        label {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: #f8fafc;
+            padding: 12px 14px;
+            font: inherit;
+            color: inherit;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 72px;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-soft);
+            background: #fff;
+        }
+
+        .materials-summary {
+            border-radius: 16px;
+            border: 1px dashed var(--border);
+            padding: 18px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 12px;
             border-radius: 12px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(148, 163, 184, 0.12);
+            font-size: 0.88rem;
         }
-        .card-hover {
-            transition: all 0.3s ease;
+
+        .summary-item strong {
+            font-weight: 600;
         }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 28px 0 rgba(31, 38, 135, 0.15);
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 18px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
         }
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(30, 58, 138, 0.05) 100%);
-            border-left: 4px solid #1e40af;
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 12px 24px rgba(37, 99, 235, 0.2);
         }
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #1e40af;
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 16px 30px rgba(37, 99, 235, 0.25);
         }
-        .timeline-line {
-            width: 2px;
-            background-color: #e2e8f0;
+
+        .btn-secondary {
+            background: rgba(15, 23, 42, 0.06);
+            color: var(--text);
         }
-        .skill-pill {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            background-color: #e0e7ff;
-            color: #1e40af;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            font-size: 14px;
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .alert {
+            display: none;
+            border-radius: 14px;
+            padding: 14px 16px;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            font-size: 0.9rem;
+        }
+
+        .tasks-empty {
+            border: 2px dashed var(--border);
+            border-radius: 18px;
+            padding: 32px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .tasks-list {
+            display: grid;
+            gap: 18px;
+        }
+
+        .task-card {
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .task-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: var(--muted);
+        }
+
+        .materials-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .material-pill {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: grid;
+            gap: 6px;
+            font-size: 0.88rem;
+        }
+
+        .material-pill header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .material-pill footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        dialog {
+            border: none;
+            border-radius: 22px;
+            padding: 0;
+            box-shadow: 0 30px 80px rgba(15, 23, 42, 0.28);
+            width: min(720px, calc(100vw - 40px));
+        }
+
+        dialog::backdrop {
+            background: rgba(15, 23, 42, 0.45);
+        }
+
+        .modal {
+            padding: clamp(22px, 3vw, 30px);
+            display: grid;
+            gap: 20px;
+        }
+
+        .modal header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal header h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .modal header button {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            line-height: 1;
+            cursor: pointer;
+            color: var(--muted);
+        }
+
+        .materials-manager {
+            display: grid;
+            gap: 16px;
+        }
+
+        .material-row {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .material-row header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .material-row header .tag {
+            background: rgba(37, 99, 235, 0.08);
+        }
+
+        .material-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .material-actions button {
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+        }
+
+        .material-row footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .error-text {
+            color: var(--danger);
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        @media (max-width: 960px) {
+            main {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <div class="container mx-auto py-8 px-4 md:px-8 max-w-4xl">
-        <!-- 头部信息 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <div class="flex flex-col md:flex-row items-center md:items-start">
-                <div class="w-24 h-24 rounded-full bg-gradient-to-r from-blue-800 to-blue-600 flex items-center justify-center text-white text-4xl font-bold mb-4 md:mb-0 md:mr-6">
-                    陈
-                </div>
-                <div class="text-center md:text-left">
-                    <h1 class="text-3xl font-bold text-blue-900 mb-2">陈希旸</h1>
-                    <div class="text-xl font-semibold text-blue-700 mb-4">互联网销售 | 2年工作经验</div>
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-phone-alt mr-2 text-blue-600"></i>
-                            <span>17605015572</span>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-envelope mr-2 text-blue-600"></i>
-                            <span>2868037696@qq.com</span>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fab fa-weixin mr-2 text-blue-600"></i>
-                            <span>Euphoria-0225</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<body>
+<header>
+    <h1>每日任务进度库</h1>
+    <p>登记每日任务与素材完成情况，确保每个商品都具备完整的照片与视频素材。</p>
+</header>
+<main>
+    <section class="card" aria-labelledby="formTitle">
+        <div>
+            <span class="tag">新建任务</span>
+            <h2 id="formTitle" style="margin:12px 0 0;font-size:1.1rem;">填写任务信息</h2>
         </div>
-
-        <!-- 求职意向 -->
-        <div class="glassmorphism p-8 mb-8 card-hover bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-600">
-            <h2 class="text-2xl font-bold text-blue-900 mb-4 flex items-center">
-                <i class="fas fa-bullseye mr-3 text-blue-600"></i>求职意向
-            </h2>
-            <div class="pl-2">
-                <p class="text-lg font-semibold text-blue-800">目标职位：互联网销售</p>
-                <p class="text-gray-700 mt-2">期望薪资：7-9K | 期望城市：福州</p>
+        <form id="taskForm">
+            <div class="field">
+                <label for="taskDate">任务日期</label>
+                <input type="date" id="taskDate" required>
             </div>
+            <div class="field">
+                <label for="productName">商品名称</label>
+                <input type="text" id="productName" placeholder="请输入商品名称" required>
+            </div>
+            <div class="field">
+                <label for="productType">商品类型</label>
+                <input type="text" id="productType" placeholder="例如：家电、服饰" required>
+            </div>
+            <div class="field">
+                <label for="productCountry">商品所属国家</label>
+                <input type="text" id="productCountry" placeholder="例如：中国、日本" required>
+            </div>
+            <div class="field">
+                <label>素材管理</label>
+                <div class="materials-summary" id="materialsSummary">
+                    <div class="summary-header">
+                        <strong>尚未设置素材</strong>
+                        <button type="button" class="btn btn-secondary" id="openMaterialModal">设置素材</button>
+                    </div>
+                    <p style="margin:0;color:var(--muted);font-size:0.85rem;">一个商品需上传 3 个素材，并至少包含照片与视频类型。</p>
+                </div>
+            </div>
+            <div class="alert" id="formAlert"></div>
+            <button type="submit" class="btn btn-primary">保存任务</button>
+        </form>
+    </section>
+    <section class="card" aria-labelledby="tasksTitle">
+        <div class="summary-header" style="margin-bottom:-6px;">
+            <h2 id="tasksTitle" style="margin:0;font-size:1.1rem;">任务记录</h2>
+            <span class="tag" id="taskCount">0 个任务</span>
         </div>
-
-        <!-- 教育背景 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-graduation-cap mr-3 text-blue-600"></i>教育背景
-            </h2>
-            <div class="space-y-4">
-                <div class="flex">
-                    <div class="flex flex-col items-center mr-4">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line flex-grow mt-2"></div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-800">福建信息职业学院</h3>
-                        <p class="text-gray-600">大学学历 | 2020年09月-2023年06月</p>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div class="flex flex-col items-center mr-4">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line flex-grow mt-2"></div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-800">福建省福州市第18中学</h3>
-                        <p class="text-gray-600">高中学历 | 2017年09月-2020年06月</p>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div class="flex flex-col items-center mr-4">
-                        <div class="timeline-dot"></div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-800">福建西山学校</h3>
-                        <p class="text-gray-600">初中学历 | 2014年09月-2017年06月</p>
-                    </div>
-                </div>
-            </div>
+        <div id="tasksContainer" class="tasks-list">
+            <div class="tasks-empty" id="emptyState">暂无任务记录，请先创建一个任务。</div>
         </div>
+    </section>
+</main>
 
-        <!-- 职业经历 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-briefcase mr-3 text-blue-600"></i>职业经历
-            </h2>
-            <div class="space-y-6">
-                <!-- 第一份工作 -->
-                <div class="highlight-box p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-blue-800">福建湃特利网络科技有限公司 | 销售与市场推广</h3>
-                        <p class="text-gray-500 text-sm md:text-base">2024年10月11日-2025年07月25日</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>负责公司核心产品的市场推广与销售策略落地，在提成激励机制下完成季度销售目标</li>
-                        <li>运用AI数据分析工具构建客户画像，精准定位目标群体，提升获客转化率</li>
-                        <li>策划并执行线上营销活动8场，累计触达用户5万+，带动产品曝光量增长</li>
-                        <li>协同设计团队优化产品宣传素材，使用Photoshop完成海报设计，提升品牌视觉识别度</li>
-                    </ul>
-                </div>
-
-                <!-- 第二份工作 -->
-                <div class="highlight-box p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-blue-800">福州千月电子商务有限公司 | 淘宝店铺运营专员</h3>
-                        <p class="text-gray-500 text-sm md:text-base">2024年02月05日-2024年09月05日</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>全面负责淘宝店铺的日常运营与销售管理，在提成制驱动下实现店铺月销售额环比增长</li>
-                        <li>运用Photoshop完成产品详情页设计与主图优化，提升视觉转化率</li>
-                        <li>使用剪映制作产品宣传短视频，带动新品销量增长</li>
-                        <li>借助AI数据分析工具研判市场趋势，优化关键词投放策略，降低获客成本</li>
-                    </ul>
-                </div>
-
-                <!-- 第三份工作 -->
-                <div class="highlight-box p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-blue-800">福州护航数码有限公司 | 网络销售专员</h3>
-                        <p class="text-gray-500 text-sm md:text-base">2023年07月25日-2024年01月31日</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>负责POS机产品的线上销售与推广，在提成激励模式下，主动开拓中小企业客户资源，超额完成月度销售目标</li>
-                        <li>通过电话营销与线上沟通，建立完善的客户档案管理体系，提升客户复购率</li>
-                        <li>协同技术团队解决客户使用问题，优化服务流程，保持高客户满意度评分</li>
-                    </ul>
-                </div>
+<dialog id="materialModal">
+    <div class="modal">
+        <header>
+            <div>
+                <h2>设置商品素材</h2>
+                <p style="margin:6px 0 0;color:var(--muted);font-size:0.88rem;">上传 3 项素材文件，并记录上传时间与备注。素材需涵盖照片与视频。</p>
             </div>
-        </div>
-
-        <!-- 专业技能 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-tools mr-3 text-blue-600"></i>专业技能
-            </h2>
-            <div class="flex flex-wrap">
-                <span class="skill-pill"><i class="fas fa-image mr-1"></i> Photoshop图像处理</span>
-                <span class="skill-pill"><i class="fas fa-video mr-1"></i> 剪映/PR视频剪辑</span>
-                <span class="skill-pill"><i class="fas fa-chart-line mr-1"></i> 销售管理与客户转化</span>
-                <span class="skill-pill"><i class="fas fa-laptop-code mr-1"></i> 办公软件与网站建设</span>
-                <span class="skill-pill"><i class="fas fa-users mr-1"></i> 团队协作与跨部门沟通</span>
-                <span class="skill-pill"><i class="fas fa-lightbulb mr-1"></i> 市场趋势分析</span>
-            </div>
-        </div>
-
-        <!-- 个人项目 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-project-diagram mr-3 text-blue-600"></i>个人项目
-            </h2>
-            <div class="highlight-box p-6 rounded-lg">
-                <h3 class="text-xl font-semibold text-blue-800 mb-3">品牌烧烤店投资运营 | 投资人 | 2023年-2024年</h3>
-                <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                    <li>投资运营两家品牌烧烤店，主导完成选址评估、竞品分析及差异化定位</li>
-                    <li>负责前期人员培训，建立标准化服务流程，团队规模扩展至15人</li>
-                    <li>后因区域同类餐饮竞争白热化，经股东协商实施战略收缩，完成平稳闭店</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 个人优势 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-star mr-3 text-blue-600"></i>个人优势
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-users mr-2"></i>团队协作</h3>
-                    <p class="text-gray-700 text-sm">具备出色的团队融入能力，擅长跨部门沟通协作，在集体项目中能主动承担责任并推动目标达成</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-bolt mr-2"></i>执行韧性</h3>
-                    <p class="text-gray-700 text-sm">对既定目标保持高度专注，面对挑战能持续投入精力，确保任务高质量完成</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-brain mr-2"></i>学习敏锐度</h3>
-                    <p class="text-gray-700 text-sm">拥有快速学习能力，可在短期内掌握新工具与技术</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-chart-pie mr-2"></i>行业洞察</h3>
-                    <p class="text-gray-700 text-sm">对互联网发展趋势有一定的理解，持续关注新兴营销模式与技术应用</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 自我评价 -->
-        <div class="glassmorphism p-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-user-edit mr-3 text-blue-600"></i>自我评价
-            </h2>
-            <div class="bg-blue-50 p-6 rounded-lg">
-                <p class="text-gray-700 italic">
-                    作为一名具备多元技能的销售从业者，始终以"肯干才能赚钱"为职业信条。精通PS、剪映、PR等设计工具，能够从视觉到策略全方位赋能业务。通过数据驱动与高效执行，在竞争市场中持续创造价值，期待在更具挑战性的平台实现职业突破。
-                </p>
-            </div>
+            <button type="button" id="closeMaterialModal" aria-label="关闭素材设置">×</button>
+        </header>
+        <div class="materials-manager" id="materialsManager"></div>
+        <div class="error-text" id="materialError"></div>
+        <div class="material-actions" style="justify-content: flex-end;">
+            <button type="button" class="btn btn-secondary" id="resetMaterials">重置</button>
+            <button type="button" class="btn btn-primary" id="confirmMaterials">完成</button>
         </div>
     </div>
+</dialog>
 
-    <script>
-        // 简单的交互效果
-        document.addEventListener('DOMContentLoaded', function() {
-            // 卡片悬停效果
-            const cards = document.querySelectorAll('.card-hover');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                    this.style.boxShadow = '0 12px 28px 0 rgba(31, 38, 135, 0.15)';
-                });
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                    this.style.boxShadow = '';
-                });
+<template id="materialTemplate">
+    <article class="material-row">
+        <header>
+            <strong class="material-title">素材</strong>
+            <select class="material-type">
+                <option value="photo">照片</option>
+                <option value="video">视频</option>
+            </select>
+        </header>
+        <div class="material-actions">
+            <input type="file" hidden>
+            <button type="button" class="btn btn-secondary upload-btn">上传文件</button>
+            <button type="button" class="btn btn-secondary download-btn" disabled>下载素材</button>
+        </div>
+        <textarea class="material-remark" placeholder="素材备注（可选）"></textarea>
+        <footer>
+            <span class="file-name">尚未上传文件</span>
+            <span class="upload-time">上传时间：-</span>
+        </footer>
+    </article>
+</template>
+
+<script>
+    const MATERIAL_COUNT = 3;
+    const materialsSummary = document.getElementById('materialsSummary');
+    const materialsManager = document.getElementById('materialsManager');
+    const materialModal = document.getElementById('materialModal');
+    const openMaterialModalBtn = document.getElementById('openMaterialModal');
+    const closeMaterialModalBtn = document.getElementById('closeMaterialModal');
+    const resetMaterialsBtn = document.getElementById('resetMaterials');
+    const confirmMaterialsBtn = document.getElementById('confirmMaterials');
+    const materialTemplate = document.getElementById('materialTemplate');
+    const materialError = document.getElementById('materialError');
+
+    const taskForm = document.getElementById('taskForm');
+    const formAlert = document.getElementById('formAlert');
+    const tasksContainer = document.getElementById('tasksContainer');
+    const emptyState = document.getElementById('emptyState');
+    const taskCountTag = document.getElementById('taskCount');
+
+    let currentMaterials = [];
+    let tasks = [];
+
+    function createId(prefix = 'id') {
+        if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+            return crypto.randomUUID();
+        }
+        return `${prefix}-${Math.random().toString(16).slice(2)}-${Date.now()}`;
+    }
+
+    function escapeHtml(text = '') {
+        return text.replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[char] || char));
+    }
+
+    function createEmptyMaterial(index) {
+        return {
+            id: createId('material'),
+            slot: index + 1,
+            type: index < 2 ? 'photo' : 'video',
+            fileName: '',
+            fileData: '',
+            uploadedAt: '',
+            remark: ''
+        };
+    }
+
+    function ensureMaterialSlots() {
+        if (currentMaterials.length === MATERIAL_COUNT) return;
+        const next = [];
+        for (let i = 0; i < MATERIAL_COUNT; i++) {
+            const existing = currentMaterials[i];
+            next.push(existing ? existing : createEmptyMaterial(i));
+        }
+        currentMaterials = next;
+    }
+
+    function formatDateTime(value) {
+        if (!value) return '-';
+        const date = new Date(value);
+        return date.toLocaleString('zh-CN', { hour12: false });
+    }
+
+    function renderMaterialsManager() {
+        materialsManager.innerHTML = '';
+        ensureMaterialSlots();
+        currentMaterials.forEach((material, index) => {
+            const node = materialTemplate.content.firstElementChild.cloneNode(true);
+            node.dataset.id = material.id;
+            node.querySelector('.material-title').textContent = `素材 ${index + 1}`;
+
+            const typeSelect = node.querySelector('.material-type');
+            typeSelect.value = material.type;
+            typeSelect.addEventListener('change', (event) => {
+                material.type = event.target.value;
+                renderMaterialsSummary();
             });
+
+            const fileInput = node.querySelector('input[type="file"]');
+            const uploadBtn = node.querySelector('.upload-btn');
+            const downloadBtn = node.querySelector('.download-btn');
+            const fileNameEl = node.querySelector('.file-name');
+            const uploadTimeEl = node.querySelector('.upload-time');
+            const remarkField = node.querySelector('.material-remark');
+
+            remarkField.value = material.remark;
+            remarkField.addEventListener('input', (event) => {
+                material.remark = event.target.value.trim();
+                renderMaterialsSummary();
+            });
+
+            fileNameEl.textContent = material.fileName || '尚未上传文件';
+            uploadTimeEl.textContent = '上传时间：' + formatDateTime(material.uploadedAt);
+
+            uploadBtn.addEventListener('click', () => fileInput.click());
+            fileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = () => {
+                    material.fileName = file.name;
+                    material.fileData = reader.result;
+                    material.uploadedAt = new Date().toISOString();
+                    fileNameEl.textContent = material.fileName;
+                    uploadTimeEl.textContent = '上传时间：' + formatDateTime(material.uploadedAt);
+                    downloadBtn.disabled = false;
+                    renderMaterialsSummary();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            if (material.fileData) {
+                downloadBtn.disabled = false;
+                downloadBtn.addEventListener('click', () => {
+                    const link = document.createElement('a');
+                    link.href = material.fileData;
+                    link.download = material.fileName || `素材${index + 1}`;
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                });
+            }
+
+            materialsManager.appendChild(node);
         });
-    </script>
+    }
+
+    function renderMaterialsSummary() {
+        const filled = currentMaterials.filter(item => item.fileData);
+        if (filled.length === 0) {
+            materialsSummary.innerHTML = `
+                <div class="summary-header">
+                    <strong>尚未设置素材</strong>
+                    <button type="button" class="btn btn-secondary" id="openMaterialModal">设置素材</button>
+                </div>
+                <p style="margin:0;color:var(--muted);font-size:0.85rem;">一个商品需上传 3 个素材，并至少包含照片与视频类型。</p>
+            `;
+        } else {
+            const summaryItems = currentMaterials.map((material, index) => `
+                <div class="summary-item">
+                    <span><strong>素材 ${index + 1}</strong> · ${material.type === 'photo' ? '照片' : '视频'}</span>
+                    <span>${escapeHtml(material.fileName) || '未上传'}${material.uploadedAt ? ' · ' + formatDateTime(material.uploadedAt) : ''}</span>
+                </div>
+            `).join('');
+            materialsSummary.innerHTML = `
+                <div class="summary-header">
+                    <strong>${filled.length}/${MATERIAL_COUNT} 个素材已设置</strong>
+                    <button type="button" class="btn btn-secondary" id="openMaterialModal">调整素材</button>
+                </div>
+                <div class="summary-list">${summaryItems}</div>
+            `;
+        }
+        materialsSummary.querySelector('#openMaterialModal').addEventListener('click', () => {
+            openMaterialModal();
+        });
+    }
+
+    function resetMaterials() {
+        currentMaterials = [];
+        ensureMaterialSlots();
+        renderMaterialsManager();
+        renderMaterialsSummary();
+        materialError.style.display = 'none';
+    }
+
+    function validateMaterials() {
+        const missingFile = currentMaterials.some(item => !item.fileData);
+        if (missingFile) {
+            return '请为 3 个素材全部上传文件。';
+        }
+        const hasPhoto = currentMaterials.some(item => item.type === 'photo');
+        const hasVideo = currentMaterials.some(item => item.type === 'video');
+        if (!hasPhoto || !hasVideo) {
+            return '素材需同时包含照片与视频类型，请调整后再试。';
+        }
+        return '';
+    }
+
+    function openMaterialModal() {
+        ensureMaterialSlots();
+        renderMaterialsManager();
+        materialModal.showModal();
+        materialError.style.display = 'none';
+    }
+
+    function closeMaterialModal() {
+        materialModal.close();
+    }
+
+    function loadTasks() {
+        try {
+            const stored = localStorage.getItem('dailyTasks');
+            if (stored) {
+                tasks = JSON.parse(stored);
+            }
+        } catch (error) {
+            console.error('读取任务失败', error);
+        }
+        renderTasks();
+    }
+
+    function saveTasks() {
+        localStorage.setItem('dailyTasks', JSON.stringify(tasks));
+    }
+
+    function renderTasks() {
+        tasksContainer.innerHTML = '';
+        if (tasks.length === 0) {
+            emptyState.style.display = 'block';
+            tasksContainer.appendChild(emptyState);
+        } else {
+            emptyState.style.display = 'none';
+            tasks.forEach(task => {
+                const card = document.createElement('article');
+                card.className = 'task-card';
+                card.innerHTML = `
+                    <div class="task-header">
+                        <strong style="font-size:1rem;">${escapeHtml(task.productName)}</strong>
+                        <span class="tag">${task.taskDate}</span>
+                    </div>
+                    <div class="task-meta">
+                        <span>类型：${escapeHtml(task.productType)}</span>
+                        <span>国家：${escapeHtml(task.productCountry)}</span>
+                    </div>
+                    <div class="materials-grid">
+                        ${task.materials.map((material, index) => `
+                            <div class="material-pill">
+                                <header>
+                                    <strong>素材 ${index + 1} · ${material.type === 'photo' ? '照片' : '视频'}</strong>
+                                    <button type="button" class="btn btn-secondary" data-download="${index}" style="padding:6px 12px;font-size:0.75rem;">下载</button>
+                                </header>
+                                <div>${escapeHtml(material.fileName)}</div>
+                                <footer>
+                                    <span>${material.remark ? '备注：' + escapeHtml(material.remark) : '无备注'}</span>
+                                    <span>${formatDateTime(material.uploadedAt)}</span>
+                                </footer>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                card.querySelectorAll('[data-download]').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const index = Number(event.currentTarget.dataset.download);
+                        const material = task.materials[index];
+                        if (!material?.fileData) return;
+                        const link = document.createElement('a');
+                        link.href = material.fileData;
+                        link.download = material.fileName || `素材${index + 1}`;
+                        document.body.appendChild(link);
+                        link.click();
+                        link.remove();
+                    });
+                });
+
+                tasksContainer.appendChild(card);
+            });
+        }
+        taskCountTag.textContent = `${tasks.length} 个任务`;
+    }
+
+    openMaterialModalBtn.addEventListener('click', openMaterialModal);
+    closeMaterialModalBtn.addEventListener('click', () => {
+        closeMaterialModal();
+    });
+    materialModal.addEventListener('cancel', (event) => {
+        event.preventDefault();
+        closeMaterialModal();
+    });
+
+    resetMaterialsBtn.addEventListener('click', () => {
+        resetMaterials();
+    });
+
+    confirmMaterialsBtn.addEventListener('click', () => {
+        const message = validateMaterials();
+        if (message) {
+            materialError.textContent = message;
+            materialError.style.display = 'block';
+            return;
+        }
+        materialError.style.display = 'none';
+        renderMaterialsSummary();
+        closeMaterialModal();
+    });
+
+    taskForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const message = validateMaterials();
+        if (message) {
+            formAlert.textContent = message;
+            formAlert.style.background = 'rgba(239, 68, 68, 0.12)';
+            formAlert.style.color = varDanger();
+            formAlert.style.display = 'block';
+            openMaterialModal();
+            return;
+        }
+        formAlert.style.display = 'none';
+
+        const task = {
+            id: createId('task'),
+            taskDate: taskForm.taskDate.value,
+            productName: taskForm.productName.value.trim(),
+            productType: taskForm.productType.value.trim(),
+            productCountry: taskForm.productCountry.value.trim(),
+            createdAt: new Date().toISOString(),
+            materials: currentMaterials.map(item => ({ ...item }))
+        };
+
+        tasks.unshift(task);
+        saveTasks();
+        renderTasks();
+
+        taskForm.reset();
+        resetMaterials();
+        renderMaterialsSummary();
+
+        formAlert.textContent = '任务已保存，可在右侧查看。';
+        formAlert.style.background = 'rgba(16, 185, 129, 0.12)';
+        formAlert.style.color = varSuccess();
+        formAlert.style.display = 'block';
+        setTimeout(() => {
+            formAlert.style.display = 'none';
+        }, 3000);
+    });
+
+    function varSuccess() {
+        return getComputedStyle(document.documentElement).getPropertyValue('--success') || '#10b981';
+    }
+
+    function varDanger() {
+        return getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#ef4444';
+    }
+
+    resetMaterials();
+    renderMaterialsSummary();
+    loadTasks();
+</script>
 </body>
 </html>
