@@ -3,264 +3,454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陈希旸 - 应聘简介</title>
+    <title>Eastern Europe Marketing Site | 600×600 背景更换与多语言叠加平台</title>
     <script src="https://cdn.tailwindcss.com/3.3.3"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
         body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background: radial-gradient(circle at top, #0f172a 0%, #020617 45%, #0f172a 100%);
+            color: #e2e8f0;
         }
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .glass-card {
+            background: rgba(15, 23, 42, 0.55);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(18px);
         }
-        .card-hover {
-            transition: all 0.3s ease;
+        .neon-border {
+            position: relative;
+            overflow: hidden;
         }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 28px 0 rgba(31, 38, 135, 0.15);
+        .neon-border::after {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, rgba(59,130,246,0.4), rgba(129,140,248,0.1), rgba(248,113,113,0.4));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
         }
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(30, 58, 138, 0.05) 100%);
-            border-left: 4px solid #1e40af;
+        .neon-border:hover::after {
+            opacity: 1;
         }
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #1e40af;
+        .grid-line {
+            background-image: linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+            background-size: 36px 36px;
         }
-        .timeline-line {
-            width: 2px;
-            background-color: #e2e8f0;
+        .template-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            background: rgba(15, 23, 42, 0.6);
+            color: #f8fafc;
+            font-size: 0.85rem;
+            gap: 0.5rem;
         }
-        .skill-pill {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            background-color: #e0e7ff;
-            color: #1e40af;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            font-size: 14px;
+        .template-pill i {
+            color: #60a5fa;
+        }
+        .section-title {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.35rem;
+            width: 6px;
+            height: 1.8rem;
+            border-radius: 999px;
+            background: linear-gradient(180deg, #60a5fa, #38bdf8);
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <div class="container mx-auto py-8 px-4 md:px-8 max-w-4xl">
-        <!-- 头部信息 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <div class="flex flex-col md:flex-row items-center md:items-start">
-                <div class="w-24 h-24 rounded-full bg-gradient-to-r from-blue-800 to-blue-600 flex items-center justify-center text-white text-4xl font-bold mb-4 md:mb-0 md:mr-6">
-                    陈
-                </div>
-                <div class="text-center md:text-left">
-                    <h1 class="text-3xl font-bold text-blue-900 mb-2">陈希旸</h1>
-                    <div class="text-xl font-semibold text-blue-700 mb-4">互联网销售 | 2年工作经验</div>
-                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-phone-alt mr-2 text-blue-600"></i>
-                            <span>17605015572</span>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-envelope mr-2 text-blue-600"></i>
-                            <span>2868037696@qq.com</span>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fab fa-weixin mr-2 text-blue-600"></i>
-                            <span>Euphoria-0225</span>
-                        </div>
-                    </div>
+<body class="text-slate-200">
+    <header class="relative overflow-hidden">
+        <div class="absolute inset-0 grid-line pointer-events-none"></div>
+        <nav class="max-w-6xl mx-auto px-6 py-8 flex flex-wrap items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 via-sky-500 to-slate-900 flex items-center justify-center font-semibold text-slate-900">EE</div>
+                <div>
+                    <p class="text-lg font-semibold text-slate-50">Eastern Europe Marketing Studio</p>
+                    <p class="text-xs uppercase tracking-[0.25em] text-slate-400">600×600 creative automation</p>
                 </div>
             </div>
-        </div>
-
-        <!-- 求职意向 -->
-        <div class="glassmorphism p-8 mb-8 card-hover bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-600">
-            <h2 class="text-2xl font-bold text-blue-900 mb-4 flex items-center">
-                <i class="fas fa-bullseye mr-3 text-blue-600"></i>求职意向
-            </h2>
-            <div class="pl-2">
-                <p class="text-lg font-semibold text-blue-800">目标职位：互联网销售</p>
-                <p class="text-gray-700 mt-2">期望薪资：7-9K | 期望城市：福州</p>
+            <div class="flex flex-wrap gap-4 text-sm text-slate-300">
+                <a href="#features" class="hover:text-sky-400 transition">产品亮点</a>
+                <a href="#templates" class="hover:text-sky-400 transition">模板主题</a>
+                <a href="#workflow" class="hover:text-sky-400 transition">工作流</a>
+                <a href="#editor" class="hover:text-sky-400 transition">拖拽编辑器</a>
+                <a href="#cta" class="hover:text-sky-400 transition">立即体验</a>
             </div>
-        </div>
+            <a href="#cta" class="hidden md:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-sky-500 to-blue-500 text-slate-900 font-semibold shadow-lg shadow-sky-700/40">
+                <i class="fa-solid fa-rocket"></i> 免费试用
+            </a>
+        </nav>
 
-        <!-- 教育背景 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-graduation-cap mr-3 text-blue-600"></i>教育背景
-            </h2>
-            <div class="space-y-4">
-                <div class="flex">
-                    <div class="flex flex-col items-center mr-4">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line flex-grow mt-2"></div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-800">福建信息职业学院</h3>
-                        <p class="text-gray-600">大学学历 | 2020年09月-2023年06月</p>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div class="flex flex-col items-center mr-4">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-line flex-grow mt-2"></div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-800">福建省福州市第18中学</h3>
-                        <p class="text-gray-600">高中学历 | 2017年09月-2020年06月</p>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div class="flex flex-col items-center mr-4">
-                        <div class="timeline-dot"></div>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-blue-800">福建西山学校</h3>
-                        <p class="text-gray-600">初中学历 | 2014年09月-2017年06月</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 职业经历 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-briefcase mr-3 text-blue-600"></i>职业经历
-            </h2>
-            <div class="space-y-6">
-                <!-- 第一份工作 -->
-                <div class="highlight-box p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-blue-800">福建湃特利网络科技有限公司 | 销售与市场推广</h3>
-                        <p class="text-gray-500 text-sm md:text-base">2024年10月11日-2025年07月25日</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>负责公司核心产品的市场推广与销售策略落地，在提成激励机制下完成季度销售目标</li>
-                        <li>运用AI数据分析工具构建客户画像，精准定位目标群体，提升获客转化率</li>
-                        <li>策划并执行线上营销活动8场，累计触达用户5万+，带动产品曝光量增长</li>
-                        <li>协同设计团队优化产品宣传素材，使用Photoshop完成海报设计，提升品牌视觉识别度</li>
-                    </ul>
-                </div>
-
-                <!-- 第二份工作 -->
-                <div class="highlight-box p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-blue-800">福州千月电子商务有限公司 | 淘宝店铺运营专员</h3>
-                        <p class="text-gray-500 text-sm md:text-base">2024年02月05日-2024年09月05日</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>全面负责淘宝店铺的日常运营与销售管理，在提成制驱动下实现店铺月销售额环比增长</li>
-                        <li>运用Photoshop完成产品详情页设计与主图优化，提升视觉转化率</li>
-                        <li>使用剪映制作产品宣传短视频，带动新品销量增长</li>
-                        <li>借助AI数据分析工具研判市场趋势，优化关键词投放策略，降低获客成本</li>
-                    </ul>
-                </div>
-
-                <!-- 第三份工作 -->
-                <div class="highlight-box p-6 rounded-lg">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-3">
-                        <h3 class="text-xl font-semibold text-blue-800">福州护航数码有限公司 | 网络销售专员</h3>
-                        <p class="text-gray-500 text-sm md:text-base">2023年07月25日-2024年01月31日</p>
-                    </div>
-                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                        <li>负责POS机产品的线上销售与推广，在提成激励模式下，主动开拓中小企业客户资源，超额完成月度销售目标</li>
-                        <li>通过电话营销与线上沟通，建立完善的客户档案管理体系，提升客户复购率</li>
-                        <li>协同技术团队解决客户使用问题，优化服务流程，保持高客户满意度评分</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- 专业技能 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-tools mr-3 text-blue-600"></i>专业技能
-            </h2>
-            <div class="flex flex-wrap">
-                <span class="skill-pill"><i class="fas fa-image mr-1"></i> Photoshop图像处理</span>
-                <span class="skill-pill"><i class="fas fa-video mr-1"></i> 剪映/PR视频剪辑</span>
-                <span class="skill-pill"><i class="fas fa-chart-line mr-1"></i> 销售管理与客户转化</span>
-                <span class="skill-pill"><i class="fas fa-laptop-code mr-1"></i> 办公软件与网站建设</span>
-                <span class="skill-pill"><i class="fas fa-users mr-1"></i> 团队协作与跨部门沟通</span>
-                <span class="skill-pill"><i class="fas fa-lightbulb mr-1"></i> 市场趋势分析</span>
-            </div>
-        </div>
-
-        <!-- 个人项目 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-project-diagram mr-3 text-blue-600"></i>个人项目
-            </h2>
-            <div class="highlight-box p-6 rounded-lg">
-                <h3 class="text-xl font-semibold text-blue-800 mb-3">品牌烧烤店投资运营 | 投资人 | 2023年-2024年</h3>
-                <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                    <li>投资运营两家品牌烧烤店，主导完成选址评估、竞品分析及差异化定位</li>
-                    <li>负责前期人员培训，建立标准化服务流程，团队规模扩展至15人</li>
-                    <li>后因区域同类餐饮竞争白热化，经股东协商实施战略收缩，完成平稳闭店</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- 个人优势 -->
-        <div class="glassmorphism p-8 mb-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-star mr-3 text-blue-600"></i>个人优势
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-users mr-2"></i>团队协作</h3>
-                    <p class="text-gray-700 text-sm">具备出色的团队融入能力，擅长跨部门沟通协作，在集体项目中能主动承担责任并推动目标达成</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-bolt mr-2"></i>执行韧性</h3>
-                    <p class="text-gray-700 text-sm">对既定目标保持高度专注，面对挑战能持续投入精力，确保任务高质量完成</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-brain mr-2"></i>学习敏锐度</h3>
-                    <p class="text-gray-700 text-sm">拥有快速学习能力，可在短期内掌握新工具与技术</p>
-                </div>
-                <div class="bg-blue-50 p-4 rounded-lg">
-                    <h3 class="font-semibold text-blue-800 mb-2"><i class="fas fa-chart-pie mr-2"></i>行业洞察</h3>
-                    <p class="text-gray-700 text-sm">对互联网发展趋势有一定的理解，持续关注新兴营销模式与技术应用</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 自我评价 -->
-        <div class="glassmorphism p-8 card-hover">
-            <h2 class="text-2xl font-bold text-blue-900 mb-6 flex items-center">
-                <i class="fas fa-user-edit mr-3 text-blue-600"></i>自我评价
-            </h2>
-            <div class="bg-blue-50 p-6 rounded-lg">
-                <p class="text-gray-700 italic">
-                    作为一名具备多元技能的销售从业者，始终以"肯干才能赚钱"为职业信条。精通PS、剪映、PR等设计工具，能够从视觉到策略全方位赋能业务。通过数据驱动与高效执行，在竞争市场中持续创造价值，期待在更具挑战性的平台实现职业突破。
+        <div class="max-w-6xl mx-auto px-6 pb-20 pt-6 lg:flex lg:items-center lg:gap-12">
+            <div class="flex-1 space-y-8">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 text-sky-300 text-sm font-medium">
+                    <i class="fa-solid fa-earth-europe"></i> Eastern Europe Ready • 场景 / 单品 双模式
+                </span>
+                <h1 class="text-4xl sm:text-5xl font-bold text-slate-50 leading-tight">
+                    600×600 东欧风营销图 <span class="text-sky-400">自动生成平台</span>
+                </h1>
+                <p class="text-lg text-slate-300 max-w-2xl">
+                    一站式完成背景更换、语言适配、模板套用与布局输出。上传产品图或 CSV，即可批量产出适配东欧市场的营销素材，支持自动语言识别、OCR 文本补全与拖拽布局编辑。
                 </p>
+                <div class="flex flex-wrap gap-3">
+                    <span class="template-pill"><i class="fa-solid fa-layer-group"></i> EURO-DEAL-CARD</span>
+                    <span class="template-pill"><i class="fa-solid fa-vector-square"></i> EURO-MINIMAL</span>
+                    <span class="template-pill"><i class="fa-solid fa-swatchbook"></i> DEAL_BLUE / DEAL_RED / MINIMAL_DARK / GLASS</span>
+                </div>
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#cta" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-br from-sky-500 via-blue-500 to-indigo-500 text-slate-900 font-semibold shadow-xl shadow-sky-800/40">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> 立即生成 600×600 素材
+                    </a>
+                    <a href="#workflow" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-700 text-slate-200 hover:border-sky-400 hover:text-sky-300 transition">
+                        <i class="fa-solid fa-diagram-project"></i> 查看工作流
+                    </a>
+                </div>
+                <div class="flex flex-wrap items-center gap-6 text-slate-400 text-sm pt-6">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-language text-sky-400"></i> 语言自动识别 + 置信度兜底</div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-image text-sky-400"></i> 原尺寸 PNG 叠加，主图不变</div>
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-crop text-sky-400"></i> 强制输出 600×600 成品</div>
+                </div>
+            </div>
+            <div class="relative flex-1 mt-12 lg:mt-0">
+                <div class="absolute -top-6 -left-6 w-64 h-64 rounded-full bg-sky-500/20 blur-3xl"></div>
+                <div class="absolute -bottom-8 -right-6 w-72 h-72 rounded-full bg-blue-500/20 blur-3xl"></div>
+                <div class="glass-card rounded-3xl p-6 relative z-10 neon-border">
+                    <div class="flex justify-between items-center text-xs uppercase tracking-wide text-slate-400">
+                        <span>预览 • EURO-DEAL-CARD</span>
+                        <span>600×600 px</span>
+                    </div>
+                    <div class="mt-4 grid md:grid-cols-2 gap-4">
+                        <div class="rounded-2xl bg-slate-900/70 p-4 border border-slate-800">
+                            <p class="text-[11px] text-slate-400">背景更换</p>
+                            <h3 class="text-lg font-semibold text-slate-50">冬日农机促销</h3>
+                            <p class="text-sm text-slate-300">农机 / 东欧农村场景，保持产品原始像素，自动居中叠加。</p>
+                            <div class="mt-3 flex flex-wrap gap-2 text-[11px] text-slate-400">
+                                <span class="px-2 py-1 rounded-md bg-sky-500/10">背景模式：场景</span>
+                                <span class="px-2 py-1 rounded-md bg-sky-500/10">受众：农户</span>
+                                <span class="px-2 py-1 rounded-md bg-sky-500/10">语言：pl-PL</span>
+                            </div>
+                        </div>
+                        <div class="rounded-2xl border border-slate-800 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1602524206336-2f6c8ef4bace?auto=format&fit=crop&w=600&q=80" alt="Sample 600px preview" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-3 text-xs text-slate-300">
+                        <div class="rounded-xl border border-slate-800 p-3">
+                            <p class="font-semibold text-slate-100">多语言弹窗校准</p>
+                            <p>低置信度自动弹窗，询问是否统一为国家官方语言。</p>
+                        </div>
+                        <div class="rounded-xl border border-slate-800 p-3">
+                            <p class="font-semibold text-slate-100">OCR 回填</p>
+                            <p>base_text 为空时调用 Tesseract 从图像读取文案。</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 space-y-24">
+        <section id="features" class="space-y-12">
+            <div>
+                <h2 class="section-title text-3xl font-semibold text-slate-100">产品亮点</h2>
+                <p class="mt-4 text-slate-300 max-w-3xl">Eastern Europe Marketing Site 汇集背景替换、模板渲染、语言处理、OCR 与布局编辑等核心能力，为电商与营销团队提供一条龙 600×600 素材生产体验。</p>
+            </div>
+            <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <article class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-300 text-xl"><i class="fa-solid fa-image"></i></div>
+                    <h3 class="text-xl font-semibold text-slate-50">背景更换引擎</h3>
+                    <p class="text-slate-300 text-sm">支持批量上传 CSV，按型号、特点与受众自动生成东欧风背景提示词，提供场景 / 单品两种模式，一键输出 600×600 成品图。</p>
+                    <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>原图产品 PNG 保持像素比例，自动对齐信息卡区域。</li>
+                        <li>可配置 product_offset_x / product_offset_y 精调摆位。</li>
+                    </ul>
+                </article>
+                <article class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-300 text-xl"><i class="fa-solid fa-language"></i></div>
+                    <h3 class="text-xl font-semibold text-slate-50">多语言智能识别</h3>
+                    <p class="text-slate-300 text-sm">自动检测 CSV 字段语言，提供置信度评分。当置信度低时弹窗询问是否统一切换为指定国家语言，确保东欧市场文案符合当地习惯。</p>
+                    <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>支持语言兜底：Italy、Poland、Romania、Bulgaria、Greece。</li>
+                        <li>与 price_format 自动匹配货币与数字格式。</li>
+                    </ul>
+                </article>
+                <article class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-fuchsia-500/20 flex items-center justify-center text-fuchsia-300 text-xl"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3 class="text-xl font-semibold text-slate-50">双模板体系</h3>
+                    <p class="text-slate-300 text-sm">内置 EURO-DEAL-CARD 与 EURO-MINIMAL 两大模板，覆盖 DEAL_BLUE / DEAL_RED / MINIMAL_DARK / GLASS 四类主题风格。</p>
+                    <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>价格、CTA、Bullet 支持可选字段，自适应布局。</li>
+                        <li>CTA、高亮区域遵循东欧视觉偏好。</li>
+                    </ul>
+                </article>
+                <article class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-300 text-xl"><i class="fa-solid fa-eye"></i></div>
+                    <h3 class="text-xl font-semibold text-slate-50">OCR 文案回填</h3>
+                    <p class="text-slate-300 text-sm">当 CSV 中 base_text 为空时，可选启用 Tesseract OCR 自动读取背景图或上传原图中的文字，保障信息完整性。</p>
+                    <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>行级 OCR 开关：ocr=yes/no。</li>
+                        <li>识别内容自动写入 headline / bullet 字段。</li>
+                    </ul>
+                </article>
+                <article class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-300 text-xl"><i class="fa-solid fa-object-group"></i></div>
+                    <h3 class="text-xl font-semibold text-slate-50">拖拽信息卡编辑器</h3>
+                    <p class="text-slate-300 text-sm">通过 /editor 拖拽定义信息卡区域，自动保存 region_norm（x1,y1,x2,y2）到 outputs/layouts.json，批量生产保持一致。</p>
+                    <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>多图对齐支持，实时预览产品叠加效果。</li>
+                        <li>历史布局自动匹配空缺 region_norm 的条目。</li>
+                    </ul>
+                </article>
+                <article class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/20 flex items-center justify-center text-rose-300 text-xl"><i class="fa-solid fa-table"></i></div>
+                    <h3 class="text-xl font-semibold text-slate-50">数据驱动产出</h3>
+                    <p class="text-slate-300 text-sm">CSV 字段覆盖 image_path、product_path、price、CTA、bullet1-3 等核心信息，自动校验必填项并记录处理日志。</p>
+                    <ul class="text-sm text-slate-400 space-y-2 list-disc list-inside">
+                        <li>600×600 输出统一命名，适配各大广告平台。</li>
+                        <li>批量处理完成后生成报告与下载链接。</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="templates" class="space-y-10">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+                <div>
+                    <h2 class="section-title text-3xl font-semibold text-slate-100">模板主题库</h2>
+                    <p class="mt-4 text-slate-300 max-w-2xl">覆盖促销、极简、玻璃拟态等视觉风格，适应农业、乐手、汽修、家用等多种受众场景。上传产品主图后，系统自动套用选定模板并保持原图像素。</p>
+                </div>
+                <div class="flex flex-wrap gap-3 text-xs text-slate-300">
+                    <span class="template-pill"><i class="fa-solid fa-seedling"></i> 农业设备</span>
+                    <span class="template-pill"><i class="fa-solid fa-guitar"></i> 乐手器材</span>
+                    <span class="template-pill"><i class="fa-solid fa-screwdriver-wrench"></i> 汽修工具</span>
+                    <span class="template-pill"><i class="fa-solid fa-house"></i> 家用电器</span>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <div class="glass-card rounded-3xl overflow-hidden border border-slate-800">
+                    <div class="h-44 bg-[url('https://images.unsplash.com/photo-1616628188505-d8b8a8c5845e?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center"></div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="text-lg font-semibold text-slate-100">DEAL_BLUE</h3>
+                        <p class="text-sm text-slate-300">高对比蓝色促销卡片，适合价格敏感型推广。自动添加折扣徽章与 CTA。</p>
+                        <div class="flex items-center gap-2 text-xs text-sky-300"><i class="fa-solid fa-tag"></i> 价格模块自动本地化</div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-3xl overflow-hidden border border-slate-800">
+                    <div class="h-44 bg-[url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center"></div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="text-lg font-semibold text-slate-100">DEAL_RED</h3>
+                        <p class="text-sm text-slate-300">强烈红色调强调限时优惠，支持多语言价格展示与倒计时徽标。</p>
+                        <div class="flex items-center gap-2 text-xs text-rose-300"><i class="fa-solid fa-fire"></i> 热卖标签自动生成</div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-3xl overflow-hidden border border-slate-800">
+                    <div class="h-44 bg-[url('https://images.unsplash.com/photo-1519334301445-5ca1e884af7e?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center"></div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="text-lg font-semibold text-slate-100">MINIMAL_DARK</h3>
+                        <p class="text-sm text-slate-300">暗色极简布局，突出高端产品质感。文本区域与产品区块保持 600×600 内黄金比例。</p>
+                        <div class="flex items-center gap-2 text-xs text-violet-300"><i class="fa-solid fa-gem"></i> 支持透明 PNG 光效</div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-3xl overflow-hidden border border-slate-800">
+                    <div class="h-44 bg-[url('https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center"></div>
+                    <div class="p-5 space-y-3">
+                        <h3 class="text-lg font-semibold text-slate-100">GLASS</h3>
+                        <p class="text-sm text-slate-300">玻璃拟态透明卡片，突出产品主图。可叠加多语言文案与本地化 CTA。</p>
+                        <div class="flex items-center gap-2 text-xs text-cyan-300"><i class="fa-solid fa-glass-water"></i> 支持自定义模糊度</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="space-y-10">
+            <div>
+                <h2 class="section-title text-3xl font-semibold text-slate-100">三步完成东欧市场素材</h2>
+                <p class="mt-4 text-slate-300 max-w-3xl">从数据导入到成品导出，仅需三个步骤。整个流程围绕 600×600 规格打造，确保每张图片统一标准。</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-2xl p-6 space-y-4 border border-slate-800/60">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Step 01</span>
+                        <span class="px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs">数据导入</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-100">上传 CSV + 媒体</h3>
+                    <p class="text-sm text-slate-300">填写 image_path、template、lang、price 等字段，上传背景与产品 PNG。缺失文案可选择启用 OCR 自动提取。</p>
+                    <ul class="text-xs text-slate-400 space-y-2 list-disc list-inside">
+                        <li>支持批量导入、拖拽上传</li>
+                        <li>自动校验字段合法性</li>
+                    </ul>
+                </div>
+                <div class="glass-card rounded-2xl p-6 space-y-4 border border-slate-800/60">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Step 02</span>
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs">智能处理</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-100">背景与文案适配</h3>
+                    <p class="text-sm text-slate-300">选择场景 / 单品背景模式，系统根据型号、特点与受众生成东欧风提示词并渲染背景。自动检测语言并完成模板填充。</p>
+                    <ul class="text-xs text-slate-400 space-y-2 list-disc list-inside">
+                        <li>主图原尺寸叠加，支持偏移</li>
+                        <li>价格与 CTA 自动本地化</li>
+                    </ul>
+                </div>
+                <div class="glass-card rounded-2xl p-6 space-y-4 border border-slate-800/60">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">Step 03</span>
+                        <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs">600×600 输出</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-100">批量导出与复用</h3>
+                    <p class="text-sm text-slate-300">所有成品统一输出为 600×600 PNG，生成下载链接与处理日志，可在 /editor 复用布局模板，缩短下一次操作时间。</p>
+                    <ul class="text-xs text-slate-400 space-y-2 list-disc list-inside">
+                        <li>布局自动同步 outputs/layouts.json</li>
+                        <li>支持一键生成分享预览</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="editor" class="space-y-10">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6">
+                    <h2 class="section-title text-3xl font-semibold text-slate-100">/editor 拖拽布局面板</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed">通过直观的拖拽界面定义信息卡区域。支持多图预览、尺子与网格对齐、主图叠加显示，最终自动写入 region_norm 坐标（0-1 范围）。</p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <span class="w-10 h-10 rounded-xl bg-sky-500/20 flex items-center justify-center text-sky-300"><i class="fa-solid fa-vector-square"></i></span>
+                            <div>
+                                <h3 class="text-lg font-semibold text-slate-100">多区域支持</h3>
+                                <p class="text-sm text-slate-300">针对不同模板设置多个信息卡，保存为可复用布局方案。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-300"><i class="fa-solid fa-arrows-up-down-left-right"></i></span>
+                            <div>
+                                <h3 class="text-lg font-semibold text-slate-100">实时尺寸标注</h3>
+                                <p class="text-sm text-slate-300">拖拽时显示相对坐标与像素尺寸，确保信息卡在 600×600 画布中精准落位。</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="w-10 h-10 rounded-xl bg-violet-500/20 flex items-center justify-center text-violet-300"><i class="fa-solid fa-floppy-disk"></i></span>
+                            <div>
+                                <h3 class="text-lg font-semibold text-slate-100">一键保存布局</h3>
+                                <p class="text-sm text-slate-300">保存后自动写入 outputs/layouts.json，下次导入 CSV 无需重复设置。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-sky-400/10 blur-3xl"></div>
+                    <div class="absolute -bottom-14 -right-8 w-48 h-48 rounded-full bg-emerald-400/10 blur-3xl"></div>
+                    <div class="glass-card rounded-3xl p-6 border border-slate-800 space-y-6">
+                        <div class="flex items-center justify-between text-xs text-slate-400 uppercase tracking-[0.3em]">
+                            <span>Editor Preview</span>
+                            <span>region_norm = [0.08, 0.58, 0.92, 0.92]</span>
+                        </div>
+                        <div class="aspect-square rounded-2xl border border-slate-800 overflow-hidden relative bg-[url('https://images.unsplash.com/photo-1593941707874-ef25b8b3c43d?auto=format&fit=crop&w=600&q=80')] bg-cover bg-center">
+                            <div class="absolute inset-0 bg-slate-900/40"></div>
+                            <div class="absolute left-[8%] top-[58%] w-[84%] h-[34%] border-2 border-sky-400 rounded-2xl bg-slate-900/60 backdrop-blur-sm flex flex-col justify-center items-center text-center p-4 gap-1">
+                                <p class="text-xs text-slate-300 uppercase tracking-[0.4em]">CTA</p>
+                                <p class="text-lg font-semibold text-slate-50">Kup Teraz</p>
+                                <p class="text-[11px] text-slate-300">Dopasowane do rynku Europy Wschodniej</p>
+                            </div>
+                            <div class="absolute left-3 top-3 px-3 py-1 rounded-full bg-sky-500/20 text-sky-200 text-xs">600×600 px</div>
+                        </div>
+                        <div class="text-xs text-slate-400">
+                            提示：若 CSV 未指定 region_norm，将自动读取 outputs/layouts.json 中对应模板的最新记录。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="space-y-10">
+            <div class="glass-card rounded-3xl p-10 border border-slate-800 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-sky-500/10 via-transparent to-violet-500/10 pointer-events-none"></div>
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 relative z-10">
+                    <div class="space-y-4 max-w-3xl">
+                        <h2 class="text-3xl font-semibold text-slate-50">立即部署 Eastern Europe Marketing Site</h2>
+                        <p class="text-slate-300">下载项目后使用以下命令快速启动。可选安装 Tesseract 启用 OCR。访问 <span class="text-sky-300">http://127.0.0.1:8000</span> 即可体验完整工作流。</p>
+                        <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 text-sm text-slate-200 font-mono space-y-3">
+                            <div class="flex items-center gap-3"><span class="text-sky-400">$</span> python -m venv .venv</div>
+                            <div class="flex items-center gap-3"><span class="text-sky-400">$</span> source .venv/bin/activate</div>
+                            <div class="flex items-center gap-3"><span class="text-sky-400">$</span> pip install -r requirements.txt</div>
+                            <div class="flex items-center gap-3"><span class="text-sky-400">$</span> uvicorn app.main:app --reload</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-4 min-w-[260px]">
+                        <a href="mailto:hello@eastern-europe.studio" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-br from-sky-500 via-blue-500 to-indigo-500 text-slate-900 font-semibold shadow-xl shadow-sky-800/30">
+                            <i class="fa-solid fa-envelope"></i> 商务合作：hello@eastern-europe.studio
+                        </a>
+                        <a href="#" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-slate-700 text-slate-200 hover:text-sky-300 hover:border-sky-400 transition">
+                            <i class="fa-solid fa-book"></i> 查看 CSV 字段样例
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pb-24 space-y-10">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="glass-card rounded-3xl p-8 border border-slate-800 space-y-6">
+                    <h3 class="text-2xl font-semibold text-slate-100">常见问题</h3>
+                    <div class="space-y-4 text-sm text-slate-300">
+                        <details class="bg-slate-900/50 rounded-2xl px-4 py-3 border border-slate-800">
+                            <summary class="cursor-pointer font-semibold text-slate-100">如何确保输出统一为 600×600？</summary>
+                            <p class="mt-2 text-slate-300">系统在渲染时会将背景自动裁切或填充为 600×600，并以相同分辨率导出 PNG。产品 PNG 会按原始像素叠加，不会被缩放。</p>
+                        </details>
+                        <details class="bg-slate-900/50 rounded-2xl px-4 py-3 border border-slate-800">
+                            <summary class="cursor-pointer font-semibold text-slate-100">语言识别不确定时怎么办？</summary>
+                            <p class="mt-2 text-slate-300">当检测语言置信度低于阈值时，系统会弹出提示，询问是否将整批素材统一翻译为指定国家语言或使用国家兜底语言。</p>
+                        </details>
+                        <details class="bg-slate-900/50 rounded-2xl px-4 py-3 border border-slate-800">
+                            <summary class="cursor-pointer font-semibold text-slate-100">OCR 结果如何合并进 CSV？</summary>
+                            <p class="mt-2 text-slate-300">开启 OCR 后，系统会在渲染前将识别出的 headline、bullet1-3、disclaimer 等字段回填到内存数据集中，再继续模板渲染。</p>
+                        </details>
+                    </div>
+                </div>
+                <div class="glass-card rounded-3xl p-8 border border-slate-800 space-y-6">
+                    <h3 class="text-2xl font-semibold text-slate-100">联系我们</h3>
+                    <p class="text-slate-300 text-sm">需要定制额外模板、对接内部 DAM 或营销系统？联系我们的本地化设计团队。</p>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-center gap-3 text-slate-300"><i class="fa-solid fa-phone text-sky-400"></i> +48 123 456 789</div>
+                        <div class="flex items-center gap-3 text-slate-300"><i class="fa-solid fa-location-dot text-sky-400"></i> Warsaw • Bucharest • Sofia</div>
+                        <div class="flex items-center gap-3 text-slate-300"><i class="fa-brands fa-telegram text-sky-400"></i> @eastern-europe-studio</div>
+                    </div>
+                    <div class="border border-slate-800 rounded-2xl p-6 space-y-3 bg-slate-900/40">
+                        <p class="text-xs uppercase tracking-[0.3em] text-slate-400">支持地区</p>
+                        <div class="grid grid-cols-2 gap-3 text-sm text-slate-200">
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-flag text-sky-300"></i> Poland</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-flag text-sky-300"></i> Romania</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-flag text-sky-300"></i> Bulgaria</span>
+                            <span class="flex items-center gap-2"><i class="fa-solid fa-flag text-sky-300"></i> Greece</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-800/40 py-8 text-center text-xs text-slate-500">
+        © 2025 Eastern Europe Marketing Studio. All rights reserved. Crafted for 600×600 creative production.
+    </footer>
 
     <script>
-        // 简单的交互效果
-        document.addEventListener('DOMContentLoaded', function() {
-            // 卡片悬停效果
-            const cards = document.querySelectorAll('.card-hover');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                    this.style.boxShadow = '0 12px 28px 0 rgba(31, 38, 135, 0.15)';
-                });
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = '';
-                    this.style.boxShadow = '';
-                });
+        document.querySelectorAll('details').forEach(detail => {
+            detail.addEventListener('toggle', () => {
+                if (detail.open) {
+                    detail.classList.add('border-sky-500/40');
+                } else {
+                    detail.classList.remove('border-sky-500/40');
+                }
             });
         });
     </script>
