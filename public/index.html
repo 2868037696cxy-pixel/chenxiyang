@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facebook Ads 多国广告抓取系统</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Facebook Ads 多国广告抓取系统</h1>
+        <p class="subtitle">支持全域与多国模式，实时日志显示并导出 Excel 报表。</p>
+      </header>
+
+      <section class="card">
+        <form id="scrape-form">
+          <div class="field">
+            <label for="keywords">关键词文件（TXT / CSV，可选）</label>
+            <input type="file" id="keywords" name="keywords" accept=".txt,.csv" />
+            <p class="hint">如不上传文件，可在下方文本框中直接粘贴关键词，每行一个。</p>
+          </div>
+
+          <div class="field">
+            <label for="keywords-text">直接填写关键词</label>
+            <textarea
+              id="keywords-text"
+              name="keywordText"
+              rows="6"
+              placeholder="示例：\nBosch\nTomTom\nSony"
+            ></textarea>
+          </div>
+
+          <fieldset class="field">
+            <legend>抓取模式</legend>
+            <label class="radio">
+              <input type="radio" name="mode" value="global" checked />
+              <span>模式一：全域「正在投放」广告数量统计（country=ALL）</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="mode" value="multi" />
+              <span>模式二：多国广告数量对比（PL / RO / IT / GR / HR / BG / HU / CZ / SK）</span>
+            </label>
+          </fieldset>
+
+          <div class="field hidden" id="country-field">
+            <div class="field-header">
+              <label for="country-list">选择要统计的国家 / 地区</label>
+              <div class="country-actions">
+                <button type="button" class="ghost" data-action="select-all">全选</button>
+                <button type="button" class="ghost" data-action="clear-all">全不选</button>
+              </div>
+            </div>
+            <p class="hint">默认会选择 Render 配置中支持的所有国家，您也可以自定义任意组合。</p>
+            <div id="country-list" class="country-grid" aria-live="polite"></div>
+          </div>
+
+          <details class="field">
+            <summary>高级设置（可选）</summary>
+            <p>若需要自动登录 Facebook，请在启动服务前配置环境变量 <code>FB_EMAIL</code> 与 <code>FB_PASSWORD</code>。</p>
+          </details>
+
+          <button type="submit" class="primary">开始抓取</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>任务进度</h2>
+        <div class="progress">
+          <div
+            class="progress-bar"
+            id="progress-bar"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          ></div>
+        </div>
+        <p id="progress-text">等待任务开始...</p>
+      </section>
+
+      <section class="card">
+        <h2>实时日志</h2>
+        <div id="log" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <template id="log-entry-template">
+      <div class="log-entry">
+        <time></time>
+        <p></p>
+      </div>
+    </template>
+
+    <script src="/script.js" defer></script>
+  </body>
+</html>
