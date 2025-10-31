@@ -18,6 +18,7 @@ let isRunning = false;
 let supportedCountries = [];
 let defaultCountries = [];
 let eventStreamInterrupted = false;
+const submitButton = form.querySelector("button[type='submit']");
 
 initEventSource();
 loadConfig();
@@ -44,10 +45,12 @@ function initEventSource() {
     }
   });
   eventSource.addEventListener("open", () => {
-    if (eventStreamInterrupted) {
+    const wasInterrupted = eventStreamInterrupted;
+    if (wasInterrupted) {
       appendLog("事件流连接已恢复。");
     }
     eventStreamInterrupted = false;
+    syncStatusWithServer(wasInterrupted);
   });
 }
 
@@ -64,7 +67,7 @@ function handleEvent(event) {
 
   if (type === "done") {
     isRunning = false;
-    form.querySelector("button[type='submit']").disabled = false;
+    submitButton.disabled = false;
     progressBar.style.width = "100%";
     progressBar.setAttribute("aria-valuenow", "100");
     const countrySuffix = Array.isArray(countries) && countries.length ? `（国家：${countries.join(", ")}）` : "";
@@ -73,7 +76,7 @@ function handleEvent(event) {
 
   if (type === "error") {
     isRunning = false;
-    form.querySelector("button[type='submit']").disabled = false;
+    submitButton.disabled = false;
     progressBar.style.width = "0%";
     progressBar.setAttribute("aria-valuenow", "0");
     progressText.textContent = message || "任务失败";
@@ -81,6 +84,45 @@ function handleEvent(event) {
 
   if (message) {
     appendLog(message, timestamp);
+  }
+}
+
+async function syncStatusWithServer(wasInterrupted = false) {
+  try {
+    const response = await fetch("/api/status", { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error("无法获取任务状态");
+    }
+
+    const data = await response.json();
+    const wasRunning = isRunning;
+
+    if (data.running) {
+      isRunning = true;
+      submitButton.disabled = true;
+      const statusMessage = data.jobId
+        ? `任务正在执行（ID: ${data.jobId}），请稍候...`
+        : "任务正在执行，请稍候...";
+      progressText.textContent = statusMessage;
+      if (!wasRunning || wasInterrupted) {
+        appendLog(
+          data.jobId
+            ? `已恢复与正在执行任务（ID: ${data.jobId}）的连接。`
+            : "已恢复与正在执行任务的连接。"
+        );
+      }
+    } else {
+      isRunning = false;
+      submitButton.disabled = false;
+      if (wasRunning || wasInterrupted) {
+        appendLog("检测到服务器已无运行中的任务，界面已重置。");
+        progressBar.style.width = "0%";
+        progressBar.setAttribute("aria-valuenow", "0");
+        progressText.textContent = "当前没有正在执行的任务。";
+      }
+    }
+  } catch (error) {
+    appendLog(`同步任务状态失败：${error.message}`);
   }
 }
 
@@ -194,7 +236,7 @@ async function handleSubmit(event) {
 
   try {
     isRunning = true;
-    form.querySelector("button[type='submit']").disabled = true;
+    submitButton.disabled = true;
     progressBar.style.width = "0%";
     progressBar.setAttribute("aria-valuenow", "0");
     progressText.textContent = "任务已提交，等待服务器启动 Puppeteer...";
@@ -214,7 +256,7 @@ async function handleSubmit(event) {
     appendLog(`任务已开始：${jobId}`);
   } catch (error) {
     isRunning = false;
-    form.querySelector("button[type='submit']").disabled = false;
+    submitButton.disabled = false;
     progressText.textContent = error.message || "提交失败";
     appendLog(`错误：${error.message}`);
   }

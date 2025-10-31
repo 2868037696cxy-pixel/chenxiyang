@@ -91,6 +91,14 @@ app.post("/api/run", upload.single("keywords"), async (req, res) => {
   return res.json({ jobId: activeJob.id });
 });
 
+app.get("/api/status", (req, res) => {
+  if (activeJob) {
+    return res.json({ running: true, jobId: activeJob.id });
+  }
+
+  return res.json({ running: false });
+});
+
 function normalizeSelectedCountries(rawCountries) {
   const result = { valid: [], invalid: [] };
 
